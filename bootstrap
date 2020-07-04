@@ -1,0 +1,12 @@
+#!/bin/sh
+
+test `id -u` -eq 0 || {
+    echo >&2 'ERROR: you must run this command with root privileges'
+    exit 1
+}
+
+# To run playbooks locally, we need Ansible
+dnf -y install ansible
+
+# Need to perform one-time operations (will restart computer)
+ansible-playbook -v first-session.yml

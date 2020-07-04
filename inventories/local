@@ -1,0 +1,6 @@
+[workstations]
+localhost
+
+[workstations:vars]
+ansible_connection=local
+ansible_python_interpreter=auto

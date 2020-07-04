@@ -1,0 +1,13 @@
+---
+- name: Initial setup through the first reboot
+  hosts: workstations
+  become: true
+
+  tasks:
+  - name: Update RPMs
+    dnf:
+      name: "*"
+      state: latest  # noqa 403
+
+  - name: Reboot to apply kernel updates
+    reboot:

@@ -1,0 +1,9 @@
+---
+- name: Test
+  hosts: workstations
+  become: true
+
+  tasks:
+  - name: View filesystems
+    command: df -h
+    changed_when: false
