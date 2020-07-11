@@ -30,3 +30,12 @@ $(foreach playbook,$(playbooks),$(eval $(call defrules,$(playbook))))
 .PHONY: clean
 clean:
 	rm -rf $(targetdir)
+
+
+# Test a single Ansible $(ROLE), passing $(TFLAGS) to ansible-playbook:
+# (b)ecome the root user, prompt for credentials (K), and run (v)erbosely
+TFLAGS := -bKv
+.PHONY: test
+test:
+	@test "X$(ROLE)" != X || { echo >&2 'Unset variable: ROLE'; exit 1; }
+	ansible-playbook -C -e role=$(ROLE) $(TFLAGS) single-role.yml
