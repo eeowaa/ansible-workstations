@@ -1,0 +1,3 @@
+---
+- import_tasks: install-vscode.yml
+- import_tasks: install-7zip.yml

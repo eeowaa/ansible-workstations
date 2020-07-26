@@ -1,0 +1,4 @@
+---
+dependencies:
+  # Required for flatpak configuration
+  - role: gnome-desktop
