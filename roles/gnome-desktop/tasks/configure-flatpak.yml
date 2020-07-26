@@ -1,0 +1,15 @@
+---
+- name: Add the flathub Flatpak repository remote to the user installation
+  become: false
+  flatpak_remote:
+    method: user
+    state: present
+    name: flathub
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+
+- name: Install Flatseal to manage Flatpak permissions
+  become: false
+  flatpak:
+    method: user
+    state: present
+    name: com.github.tchx84.Flatseal

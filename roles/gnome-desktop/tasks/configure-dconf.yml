@@ -1,0 +1,11 @@
+---
+# <https://docs.ansible.com/ansible/latest/modules/dconf_module.html>
+- name: Install psutil Python library (required by dconf Ansible module)
+  dnf:
+    state: present
+    name: "python{{ ansible_python['version']['major'] }}-psutil"
+
+- name: Install dconf-editor
+  dnf:
+    state: present
+    name: dconf-editor

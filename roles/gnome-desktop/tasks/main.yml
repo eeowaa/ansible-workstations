@@ -1,0 +1,4 @@
+---
+- import_tasks: configure-flatpak.yml
+- import_tasks: configure-dconf.yml
+- import_tasks: configure-night-light.yml
