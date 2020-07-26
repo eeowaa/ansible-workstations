@@ -31,7 +31,6 @@ $(foreach playbook,$(playbooks),$(eval $(call defrules,$(playbook))))
 clean:
 	rm -rf $(targetdir)
 
-
 # Test a single Ansible $(ROLE), passing $(TFLAGS) to ansible-playbook:
 # (b)ecome the root user, prompt for credentials (K), and run (v)erbosely
 TFLAGS := -vK

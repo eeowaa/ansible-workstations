@@ -2,9 +2,9 @@
 - name: Run individual role specified by -e role=<role>
   hosts: workstations
   tasks:
-  - name: Include {{ role }} role
-    include_role:
-      name: "{{ role }}"
+    - name: Include {{ role }} role
+      include_role:
+        name: "{{ role }}"
 ...
 # References:
 # - <https://stackoverflow.com/questions/36484980/use-ansible-facts-in-an-ansible-ad-hoc-command>
