@@ -1,8 +1,4 @@
 ---
-- name: Ensure we can access GitHub
-  import_role:
-    name: github-client
-
 - name: Clone documentation repo to ~/Documents/ref
   git:
     repo: git@github.com:eeowaa/ref.git
