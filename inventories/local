@@ -4,3 +4,7 @@ localhost
 [workstations:vars]
 ansible_connection=local
 ansible_python_interpreter=auto
+
+# <https://docs.ansible.com/ansible/latest/user_guide/become.html>
+ansible_become: true
+ansible_become_method: enable

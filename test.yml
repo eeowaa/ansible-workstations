@@ -8,7 +8,6 @@
     changed_when: false  # This task never changes the host.
 
     # `df` throws an error when run as root: <https://askubuntu.com/q/1227667>
-    # `ansible-playbook -Kb test.yml` excercises the condition.
     ignore_errors: true
 
   - name: View home data usage

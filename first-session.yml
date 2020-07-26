@@ -1,7 +1,6 @@
 ---
 - name: Initial setup through the first reboot
   hosts: workstations
-  become: true
 
   tasks:
   - name: Update RPMs
