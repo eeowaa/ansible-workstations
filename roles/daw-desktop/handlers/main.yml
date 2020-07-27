@@ -1,0 +1,11 @@
+---
+# <https://serverfault.com/questions/930804/force-ansible-to-log-off-to-refresh-user-groups>
+# <https://docs.ansible.com/ansible/2.6/modules/meta_module.html>
+- name: Log out to apply user modification
+  meta: reset_connection
+  when: ansible_connection != 'local'
+
+- name: Display instructional message
+  debug:
+    msg: '*** LOG OUT TO APPLY REQUIRED USER MODIFICATIONS ***'
+  when: ansible_connection == 'local'

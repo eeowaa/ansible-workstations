@@ -1,0 +1,12 @@
+---
+- name: Install Ardour 5
+  dnf:
+    state: present
+    name: ardour5
+
+- name: Add {{ ansible_user }} to jackuser group
+  user:
+    name: "{{ ansible_user }}"
+    groups: jackuser
+    append: yes
+  notify: Log out to apply user modification
