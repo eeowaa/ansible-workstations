@@ -38,11 +38,11 @@ Same as above:
 
 # TODO: Create a top-level `bin` directory with helper scripts
 
-1. Move `bootstrap` into `bin` and modify appropriately
-2. Add a script to report default variables that have not been overridden
+1. [DONE] Move `bootstrap` into `bin` and modify appropriately
+2. [WIP] Add a script to report default variables that have not been overridden
    - `bin/default-vars`
-3. Add a script to ignore (`git update-index --skip-worktree`) inventory files
-   that might be updated to contain sensitive information
+3. [DONE] Add a script to ignore (`git update-index --skip-worktree`) inventory
+   files that might be updated to contain sensitive information
    - `bin/lock-inventory`: hide inventory updates from Git
    - `bin/unlock-inventory`: re-enable tracking of inventory worktree
 

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Display variable names in each defaults file
+cd "`git rev-parse --show-toplevel`"
+find . -path './roles/*/defaults/*' -printf '%P:\n' \
+       -exec sed -n 's/^\(.*\):.*/  - \1/p' '{}' \;
