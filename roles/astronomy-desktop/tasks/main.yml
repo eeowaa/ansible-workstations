@@ -1,0 +1,7 @@
+---
+- name: Install Celestia and Stellarium
+  dnf:
+    state: present
+    name:
+      - celestia
+      - stellarium
