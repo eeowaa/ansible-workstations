@@ -1,6 +1,6 @@
 # NAME
 
-workstations - Ansible playbooks for provisioning workstations
+ansible-workstations - Ansible playbooks and roles to provision workstations 
 
 # SYNOPSIS
 
