@@ -1,0 +1,3 @@
+---
+- import_tasks: add-known-hosts.yml
+- import_tasks: configure-user.yml

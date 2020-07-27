@@ -1,7 +1,0 @@
----
-- name: Ensure github.com is present in known_hosts file
-  known_hosts:
-    state: present
-    name: github.com
-    key: "{{ lookup('pipe', 'ssh-keyscan github.com') }}"
-    hash_host: true

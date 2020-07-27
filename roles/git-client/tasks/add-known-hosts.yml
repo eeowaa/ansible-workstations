@@ -1,0 +1,9 @@
+---
+- name: Add Git servers to ~/.ssh/known_hosts
+  vars: { ansible_become: false }
+  known_hosts:
+    state: present
+    name: "{{ item }}"
+    key: "{{ lookup('pipe', 'ssh-keyscan ' ~ item) }}"
+    hash_host: true
+  loop: "{{ git_known_hosts }}"
