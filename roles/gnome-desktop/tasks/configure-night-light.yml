@@ -1,13 +1,13 @@
 ---
 # <https://github.com/ansible/ansible/issues/47909>
 - name: Enable Night Light
-  become: false
+  vars: { ansible_become: false }
   dconf:
     key: /org/gnome/settings-daemon/plugins/color/night-light-enabled
     value: "true"
 
 - name: Set Night Light Temperature
-  become: false
+  vars: { ansible_become: false }
   dconf:
     key: /org/gnome/settings-daemon/plugins/color/night-light-temperature
     value: "uint32 5500"

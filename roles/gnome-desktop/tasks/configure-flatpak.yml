@@ -1,6 +1,6 @@
 ---
 - name: Add the flathub Flatpak repository remote to the user installation
-  become: false
+  vars: { ansible_become: false }
   flatpak_remote:
     method: user
     state: present
@@ -8,7 +8,7 @@
     flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
 
 - name: Install Flatseal to manage Flatpak permissions
-  become: false
+  vars: { ansible_become: false }
   flatpak:
     method: user
     state: present

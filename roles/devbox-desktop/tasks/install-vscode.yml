@@ -20,7 +20,7 @@
     name: code
 
 - name: Install Visual Studio Code - OSS Flatpak
-  become: false
+  vars: { ansible_become: false }
   flatpak:
     method: user
     state: present 
