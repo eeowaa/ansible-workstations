@@ -5,7 +5,7 @@ workstations - Ansible playbooks for provisioning workstations
 # SYNOPSIS
 
 ``` sh
-sudo ./bootstrap
+sudo bin/bootstrap
 ansible-playbook -vK home-computer.yml
 ```
 

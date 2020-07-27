@@ -9,4 +9,5 @@ test `id -u` -eq 0 || {
 dnf -y install ansible
 
 # Need to perform one-time operations (will restart computer)
+cd "`git rev-parse --show-toplevel`"
 ansible-playbook -v first-session.yml
