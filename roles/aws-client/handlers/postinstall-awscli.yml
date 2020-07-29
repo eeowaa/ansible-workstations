@@ -1,0 +1,9 @@
+---
+- name: Remove AWS CLI v2 temporary files
+  tags: awscli
+  file:
+    state: absent
+    path: "{{ item }}"
+  loop:
+    - /tmp/aws
+    - /tmp/awscliv2.zip

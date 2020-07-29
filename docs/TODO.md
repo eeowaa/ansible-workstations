@@ -12,10 +12,11 @@ Investigate using variables to achieve this:
 
 Investigate using tags to achieve this.
 
-# TODO: Have some mechanism to perform updates
+# WIP: Have some mechanism to perform updates
 
 Same as above:
 - Variables (e.g. -e update=true)
+  - Currently using this for aws-client role
 - Tags (e.g. -t update)
 
 # TODO: Use `dconf` Ansible module to implement GNOME settings
