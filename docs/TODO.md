@@ -37,7 +37,7 @@ Same as above:
 1. Use [`yamllint`](https://github.com/adrienverge/yamllint)
 2. Lint roles in addition to playbooks <https://github.com/ansible/ansible-lint#linting-playbooks-and-roles>
 
-# TODO: Create a top-level `bin` directory with helper scripts
+# WIP: Create a top-level `bin` directory with helper scripts
 
 1. [DONE] Move `bootstrap` into `bin` and modify appropriately
 2. [WIP] Add a script to report default variables that have not been overridden

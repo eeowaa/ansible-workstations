@@ -1,11 +1,20 @@
 # NAME
 
-ansible-workstations - Ansible playbooks and roles to provision workstations 
+ansible-workstations - Ansible playbooks and roles to provision workstations
 
 # SYNOPSIS
 
 ``` sh
+# OPTIONAL: Hide local inventory modifications from Git
+bin/lock-inventory
+
+# OPTIONAL: Edit workstations group (member hosts and host/group variables)
+vi inventories/...
+
+# Install required tools, perform initial updates, and reboot host(s)
 sudo bin/bootstrap
+
+# Provision host(s) using an appropriate playbook
 ansible-playbook -vK home-computer.yml
 ```
 
