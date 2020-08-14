@@ -1,53 +1,58 @@
-The original reason for adding an .editorconfig was to make GitHub display hard
-tab characters as 8 columns wide.  I had no intention for this configuration to
-actually be used by editors.
+The original reason for adding an .editorconfig was to make GitHub
+display hard tab characters as 8 columns wide.  I had no intention for
+this configuration to actually be used by editors.
 
-Thinking about it a little bit, I guess I've never really liked adding editor-
-specific configuration to project repos, because:
+Thinking about it a little bit, I guess I've never really liked adding
+editor-specific configuration to project repos, because:
 
 1) It tightly couples the code with its style.
 2) It is only helpful for developers who use one of the editors you have
    supplied configuration for.
-3) In the case of Vim modelines and Emacs file variables, it clutters up source
-   files with ugly comments, for example:
+3) In the case of Vim modelines and Emacs file variables, it clutters up
+   source files with ugly comments, for example:
 
      ;; -*- mode: lisp; fill-column: 75; -*-
      ;; vim: ft=lisp cc=75
 
-However, each of these points can be addressed in a way that supports the use
-of .editorconfig files:
+However, each of these points can be addressed in a way that supports
+the use of .editorconfig files:
 
 1) IMO, the ideal situation would be to have organization-wide editor
-   configuration that all your developers can easily integrate with their
-   editors (e.g. site-wide config files in /etc, user defaults in /etc/skel).
-   This becomes more difficult to achieve in open source, where contributors
-   may not belong to your organization.  In this case, committing editor
-   configuration along with the source code is a decent alternative, although
-   it does encourage duplication between projects.
-2) EditorConfig is the most widely-supported editor-agnostic configuration
-   standard in the world right now.  It is the closest we can come to
-   eliminating problem #2, but it still requires developers to install and
-   configure EditorConfig plugins with whatever editor they are using, rather
-   than using native configuration mechanisms.  In any case, developers are not
-   forced to use EditorConfig and can simply follow the style standards on
-   their own or configure their editor another way.
-3) EditorConfig configuration is stored in separate .editorconfig files, which
-   eliminates problem #3.  (Emacs .dir-locals.el files do the same, but are
-   editor-specific.)
+   configuration that all your developers can easily integrate with
+   their editors (e.g. site-wide config files in /etc, user defaults in
+   /etc/skel).  This becomes more difficult to achieve in open source,
+   where contributors may not belong to your organization.  In this
+   case, committing editor configuration along with the source code is a
+   decent alternative, although it does encourage duplication between
+   projects.
+
+2) EditorConfig is the most widely-supported editor-agnostic
+   configuration standard in the world right now.  It is the closest we
+   can come to eliminating problem #2, but it still requires developers
+   to install and configure EditorConfig plugins with whatever editor
+   they are using, rather than using native configuration mechanisms.
+   In any case, developers are not forced to use EditorConfig and can
+   simply follow the style standards on their own or configure their
+   editor another way.
+3) EditorConfig configuration is stored in separate .editorconfig files,
+   which eliminates problem #3.  (Emacs .dir-locals.el files do the
+   same, but are editor-specific.)
 
 All that said, editor configuration can only get you so far.
 
-First of all, it cannot prevent developers from committing code that violates
-style conventions.  Git attributes can prevent certain whitespace-related
-violations, but not everything.  Pre-commit hooks should be able to handle
-everything else (assuming a POSIX environment for scripting).  Unfortunately,
-hooks must be manually enabled by developers working on a project, so you
-cannot trust that mechanism entirely.  Although imperfect, supplying a
-.gitattributes file and .githooks/ directory is a good way to potentially catch
-style violations before they are committed.
+First of all, it cannot prevent developers from committing code that
+violates style conventions.  Git attributes can prevent certain
+whitespace-related violations, but not everything.  Pre-commit hooks
+should be able to handle everything else (assuming a POSIX environment
+for scripting).  Unfortunately, hooks must be manually enabled by
+developers working on a project, so you cannot trust that mechanism
+entirely.  Although imperfect, supplying a .gitattributes file and
+.githooks/ directory is a good way to potentially catch style violations
+before they are committed.
 
-The final piece of the puzzle is to ensure that commits with style violations
-do not make it into clean branches.  Using a code hosting service such as
-GitHub or GitLab, this can be accomplished by running linters in CI pipelines
-and defining workflows to prevent merges into protected branches upon failed
-pipelines.  I will save the details for another day.
+The final piece of the puzzle is to ensure that commits with style
+violations do not make it into clean branches.  Using a code hosting
+service such as GitHub or GitLab, this can be accomplished by running
+linters in CI pipelines and defining workflows to prevent merges into
+protected branches upon failed pipelines.  I will save the details for
+another day.
