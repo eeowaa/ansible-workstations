@@ -1,0 +1,16 @@
+---
+# This allows you to see Wi-Fi networks and attempt to log in,
+# but you will not be able to connect to any of them
+- name: Install Broadcom wireless driver
+  dnf:
+    state: present
+    name: broadcom-wl
+
+# <https://fedoraproject.org/wiki/Common_F30_bugs#broadcom-wl-mesh>
+- name: Fix WPA supplicant
+  command:
+    cmd: |
+      dnf copr enable dcaratti/wpa_supplicant
+      dnf update
+    creates: /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:dcaratti:wpa_supplicant.repo
+  notify: Reboot

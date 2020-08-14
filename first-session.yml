@@ -11,5 +11,8 @@
         state: latest  # noqa 403
       notify: Reboot
 
-    - name: Reboot to apply kernel updates
-      reboot:
+    - name: Install and configure specifics to Macbook Pro
+      import_role:
+        name: macbook-pro
+      when: computer == 'Macbook Pro'
+      notify: Reboot
