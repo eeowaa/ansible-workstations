@@ -1,11 +1,15 @@
 ---
 - name: Initial setup through the first reboot
   hosts: workstations
+  handlers:
+    # <https://serverfault.com/questions/928200/global-handlers-in-ansible>
+    - import_tasks: roles/common/handlers/main.yml
   tasks:
     - name: Update RPMs
       dnf:
         name: "*"
         state: latest  # noqa 403
+      notify: Reboot
 
     - name: Reboot to apply kernel updates
       reboot:

@@ -1,0 +1,21 @@
+---
+- name: Install yum-utils compatibility layer
+  dnf:
+    state: present
+    name: dnf-utils
+
+- name: Install RPM Fusion repositories
+  dnf:
+    state: present
+    name: "https://download1.rpmfusion.org/{{ item }}/fedora/rpmfusion-{{ item }}-release-{{ ansible_distribution_major_version }}.noarch.rpm"
+  loop:
+    - free
+    - nonfree
+
+- name: Configure DNF to always assume "yes" for user
+  ini_file:
+    path: /etc/dnf/dnf.conf
+    section: main
+    option: assumeyes
+    value: true
+    backup: yes

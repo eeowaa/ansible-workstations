@@ -9,4 +9,4 @@
     name: "{{ ansible_user }}"
     groups: jackuser
     append: yes
-  notify: Log out to apply user modification
+  notify: 'Reset connection'
