@@ -1,6 +1,9 @@
 ---
+# No unique interpreter requirements for workstations
+# <https://docs.ansible.com/ansible/latest/reference_appendices/interpreter_discovery.html>
 ansible_python_interpreter: auto
 
+# Run commands with `sudo` by default (no need to pass -b)
 # <https://docs.ansible.com/ansible/latest/user_guide/become.html>
 ansible_become: true
 ansible_become_method: sudo
