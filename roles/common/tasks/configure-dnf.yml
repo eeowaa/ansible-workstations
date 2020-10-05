@@ -17,5 +17,6 @@
     path: /etc/dnf/dnf.conf
     section: main
     option: assumeyes
-    value: true
+    value: 'True'
+    no_extra_spaces: true
     backup: yes
