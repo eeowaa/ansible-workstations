@@ -2,8 +2,8 @@
 - name: Run individual role specified by -e role=<role>
   hosts: workstations
   tasks:
-    - name: Include {{ role }} role
-      include_role:
+    - name: Import {{ role }} role
+      import_role:
         name: "{{ role }}"
 ...
 # References:
