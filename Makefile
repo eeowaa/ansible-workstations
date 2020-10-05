@@ -7,6 +7,11 @@ targetdir := .make
 # Ansible playbooks we care about
 playbooks := $(wildcard *.yml)
 
+# Flags passed to `ansible-playbook` in test-* rules: run (v)erbosely and
+# prompt for credentials (K); privilege escalation (i.e. "become") is specified
+# by inventory variables
+TFLAGS := -vK
+
 # Install programs required for running this Makefile's recipes
 .PHONY: setup
 setup:
@@ -31,10 +36,13 @@ $(foreach playbook,$(playbooks),$(eval $(call defrules,$(playbook))))
 clean:
 	rm -rf $(targetdir)
 
-# Test a single Ansible $(ROLE), passing $(TFLAGS) to ansible-playbook:
-# (b)ecome the root user, prompt for credentials (K), and run (v)erbosely
-TFLAGS := -vK
-.PHONY: test
-test:
+# Test a single Ansible role specified by $(ROLE)
+.PHONY: test-role
+test-role:
 	@test "X$(ROLE)" != X || { echo >&2 'Unset variable: ROLE'; exit 1; }
 	ansible-playbook -C -e role=$(ROLE) $(TFLAGS) single-role.yml
+
+# Test a single Ansible task list specified by $(FILE)
+test-tasks:
+	@test "X$(FILE)" != X || { echo >&2 'Unset variable: FILE'; exit 1; }
+	ansible-playbook -C -e file=$(FILE) $(TFLAGS) single-task-list.yml

@@ -1,0 +1,9 @@
+---
+# I believe (TODO: verify this info) that this playbook does NOT
+# read in role-specific variables, run role-specific handlers, etc.
+- name: Run tasks in file specified by -e file=<task-list-file>
+  hosts: workstations
+  tasks:
+    - name: Import tasks from {{ file }}
+      import_tasks:
+        file: "{{ file }}"
