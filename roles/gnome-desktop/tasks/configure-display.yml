@@ -6,8 +6,14 @@
     key: /org/gnome/settings-daemon/plugins/color/night-light-enabled
     value: "true"
 
-- name: Set Night Light Temperature
+- name: Set Night Light temperature
   vars: { ansible_become: false }
   dconf:
     key: /org/gnome/settings-daemon/plugins/color/night-light-temperature
     value: "uint32 5500"
+
+- name: Disable automatic brightness
+  vars: { ansible_become: false }
+  dconf:
+    key: /org/gnome/settings-daemon/plugins/power/ambient-enabled
+    value: "false"
