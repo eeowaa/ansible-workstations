@@ -1,0 +1,15 @@
+---
+- name: Install Vim
+  dnf:
+    state: present
+    name:
+      - vim-enhanced
+      - vim-X11
+
+- name: Install Emacs and requirements for Doom Emacs
+  dnf:
+    state: present
+    name:
+      - emacs
+      - fd-find
+      - ripgrep

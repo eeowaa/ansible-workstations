@@ -1,0 +1,12 @@
+---
+- name: Install GIMP
+  dnf:
+    state: present
+    name:
+      - gimp
+
+- name: Install Inkscape
+  dnf:
+    state: present
+    name:
+      - inkscape

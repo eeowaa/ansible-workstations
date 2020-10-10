@@ -1,0 +1,13 @@
+---
+import_tasks: astronomy.yml
+import_tasks: chat.yml
+import_tasks: development.yml
+import_tasks: editing.yml
+import_tasks: games.yml
+import_tasks: graphics.yml
+import_tasks: media.yml
+import_tasks: network.yml
+import_tasks: office.yml
+import_tasks: recording.yml
+import_tasks: settings.yml
+import_tasks: storage.yml
