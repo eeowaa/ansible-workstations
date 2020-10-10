@@ -2,3 +2,4 @@
 - import_tasks: configure-flatpak.yml
 - import_tasks: configure-dconf.yml
 - import_tasks: configure-display.yml  # TODO: Map dependency on configure-dconf.yml
+- import_tasks: install-codecs.yml

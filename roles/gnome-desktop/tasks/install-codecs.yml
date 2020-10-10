@@ -1,0 +1,6 @@
+---
+- name: Install A/V codecs
+  dnf:
+    state: present
+    name:
+      - gstreamer1-plugin-openh264
