@@ -1,0 +1,22 @@
+---
+# This is part of the base Fedora install, but it's good to specify in case
+# this task list is used for other distros (or to bring us back to our desired
+# state after accidental removal of Firefox).
+- name: Install Mozilla Firefox
+  dnf:
+    state: present
+    name: firefox
+
+# This is needed to install Google Chrome, which is non-free software.
+# TODO: Decouple this task (move somewhere else) and map as a dependency.
+- name: Install Fedora Workstation repositories
+  dnf:
+    state: present
+    name: fedora-workstation-repositories
+
+# I use Chrome as a workaround for when I have problems with codecs, DRM, etc.
+# while using Firefox.  I leave Chromium uninstalled and primarily use Firefox.
+- name: Install Google Chrome
+  dnf:
+    state: present
+    name: google-chrome-stable
