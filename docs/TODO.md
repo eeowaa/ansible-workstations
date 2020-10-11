@@ -75,3 +75,31 @@ Explain variable handling
 Each role directory should have a `README.md` describing the role.  For now,
 this information doesn't need to be too detailed, and should just be copied
 from the external `fedora-start.md` document I've been maintaining separately.
+
+# TODO: Do not rely on Fedora base system
+
+Use `dnf history info 1` on your Fedora system to see the base package list.
+If you always want one of these packages on the systems you run the playbooks
+on, you should explicitly specify those packages.
+
+# TODO: Do not require the user to enter a password when checking roles
+
+`make check-<role>` currently requires the user to enter a password on the
+command prompt.  This is unnecessary and disruptive.  However, if `dnf` is not
+run with root permissions, it fails with an error message.
+
+One workaround would be to use `fakeroot(1)` to simulate running as root
+without actually elevating our permissions.  Unfortunately, this adds another
+prerequisite to be installed in the `setup` target of the Makefile.  Another
+option would be to investigate running `dnf` without root permissions.
+
+# TODO: Fix playbooks that fail in `make check`
+
+Currently, there are some failures due to required variables missing.  Either
+pass in variables using `-e var=value` or set default variables.
+
+# TODO: Attempt to use `%` type rules in the Makefile
+
+The `$(foreach playbook,$(playbooks),$(eval $(call defrules,$(playbook))))`
+magic is pretty cool, but I'd prefer to replace the deep magic with something
+more readable.
