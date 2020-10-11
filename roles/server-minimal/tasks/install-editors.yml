@@ -1,0 +1,7 @@
+---
+- name: Install basic editors
+  dnf:
+    state: present
+    name:
+      - ed
+      - vim-enhanced

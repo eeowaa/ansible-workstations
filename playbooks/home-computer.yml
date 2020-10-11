@@ -1,0 +1,8 @@
+---
+- name: Provision home computer(s) for personal use
+  hosts: workstations
+  vars_prompt:
+    - name: ssh_key_passphrase
+      prompt: Enter a passphrase for your new SSH key
+  roles:
+    - ssh-client

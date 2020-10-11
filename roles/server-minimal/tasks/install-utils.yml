@@ -1,0 +1,8 @@
+---
+- name: Install utilities
+  dnf:
+    state: present
+    name:
+      - nmap
+      - the_silver_searcher
+      - tmux
