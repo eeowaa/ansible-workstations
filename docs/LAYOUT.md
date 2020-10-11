@@ -1,3 +1,5 @@
+# Inventory
+
 There are two inventory layouts [recommended by Ansible](https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html#content-organization):
 
 ```
@@ -53,3 +55,21 @@ inventories/
       hostname1.yml       # here we assign variables to particular systems
       hostname2.yml
 ```
+
+# Playbooks and roles
+
+Ansible has a convention of storing playbooks in the top-level directory.  In
+my opinion, this convention is inconsistent with storing roles, tasks, and
+other groups of files in their own directories.  This repository takes a
+non-standard approach and stores all playbooks in the `playbooks` directory.
+
+Roles are still stored in the top-level `roles` directory, which requires
+modification of the `roles_path` variable in `ansible.cfg`.  From a user
+perspective, nothing else needs to happen to run normally.
+
+# Tasks
+
+Unorganized or work-in-progress tasks go in the top-level `tasks` directory.
+This is to encourage codifying systems administration tasks as I use my system
+as a daily driver.  Therefore, the `tasks` directory acts as a sort of staging
+environment or cache to formalize later.

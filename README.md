@@ -15,7 +15,7 @@ vi inventories/...
 sudo bin/bootstrap
 
 # Provision host(s) using an appropriate playbook
-ansible-playbook -vK home-computer.yml
+ansible-playbook -vK playbooks/home-computer.yml
 ```
 
 # DESCRIPTION
