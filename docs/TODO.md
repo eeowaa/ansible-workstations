@@ -103,3 +103,71 @@ pass in variables using `-e var=value` or set default variables.
 The `$(foreach playbook,$(playbooks),$(eval $(call defrules,$(playbook))))`
 magic is pretty cool, but I'd prefer to replace the deep magic with something
 more readable.
+
+# TODO: Clone `stow-dotfiles` if this is a developer workstation
+
+# TODO: Install Doom Emacs
+
+``` sh
+#!/bin/sh
+
+### Install dependencies {{{
+
+# Required dependencies
+brew install git ripgrep
+
+# Optional dependencies
+brew install findutils coreutils fd
+
+# Installs clang
+xcode-select --install
+
+### }}}
+### Install Emacs {{{
+
+# Let's go for the most Doom-compatible option
+brew tap d12frosted/emacs-plus
+brew install emacs-plus
+ln -s /usr/local/opt/emacs-plus/Emacs.app /Applications/Emacs.app
+
+### }}}
+### Install Doom {{{
+
+# Create directories for Doom Emacs and private config
+mkdir -p $HOME/.config/emacs $HOME/.config/doom
+
+# Clone Doom Emacs
+git clone https://github.com/hlissner/doom-emacs $HOME/.config/emacs
+
+# So we don't have to write $HOME/.emacs.d/bin/doom every time
+PATH="$HOME/.emacs.d/bin:$PATH"
+
+# The init.example.el file contains an example doom! call, which tells Doom what
+# modules to load and in what order.
+cp $HOME/.config/emacs/init.example.el $HOME/.config/doom/init.el
+cp $HOME/.config/emacs/core/templates/config.example.el $HOME/.config/doom/config.el
+cp $HOME/.config/emacs/core/templates/packages.example.el $HOME/.config/doom/packages.el
+
+# You might want to edit $HOME/.doom.d/init.el here and make sure you only have the
+# modules you want enabled.
+
+# Then synchronize Doom with your config:
+doom sync
+
+# If you know Emacs won't be launched from your shell environment (e.g. you're
+# on macOS or use an app launcher that doesn't launch programs with the correct
+# shell) then create an envvar file to ensure Doom correctly inherits your shell
+# environment.
+#
+# If you don't know whether you need this or not, there's no harm in doing it
+# anyway. `doom install` will have prompted you to generate one. If you
+# responded no, you can generate it later with the following command:
+doom env
+
+# Lastly, install the icon fonts Doom uses:
+emacs --batch -f all-the-icons-install-fonts
+# On Windows, `all-the-icons-install-fonts` will only download the fonts, you'll
+# have to install them by hand afterwards!
+
+### }}}
+```
