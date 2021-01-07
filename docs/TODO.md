@@ -30,6 +30,10 @@ Same as above:
   ...manually change setting...
   dconf dump / >/tmp/after
   diff -u /tmp/{before,after}
+
+  # Alternatively (https://askubuntu.com/questions/72070/how-do-i-change-dconf-keys-without-a-gui-for-a-post-install-script)
+  dconf watch /
+  ...manually change setting...
   ```
 
 # TODO: Improve linting
