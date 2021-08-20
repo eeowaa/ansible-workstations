@@ -1,0 +1,48 @@
+# On the specific Macbook Pro that this role is meant for, the Left Shift and
+# Left Option keys are broken: when you press one of those keys, the codes for
+# both keys are sent. My custom keymap works around this problem by ignoring
+# the keycode (56) corresponding to Left Option, essentially restoring
+# functionality to the Left Shift key while turning Left Option into an
+# additional Left Shift key. My custom keymap also remaps the Left Command
+# keycode (125) from Alt to Control.
+---
+- name: Check for existence of gzipped custom keyboard map
+  stat:
+    path: "{{ keymaps_dir }}/{{ keymaps.macbook_pro }}.map.gz"
+  register: keymap
+
+- name: Install the custom keyboard map
+  when: not keymap.stat.exists
+  block:
+    - name: Create a directory for custom keyboard maps
+      file:
+        state: directory
+        path: "{{ keymaps_dir }}"
+        owner: root
+        group: root
+        mode: 0755
+
+    - name: Install the uncompressed .map file
+      copy:
+        src: "{{ role_path }}/files/{{ keymaps.macbook_pro }}.map"
+        dest: "{{ keymaps_dir }}/{{ keymaps.macbook_pro }}.map"
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: Compress the .map file (.map.gz)
+      archive:
+        path: "{{ keymaps_dir }}/{{ keymaps.macbook_pro }}.map"
+        remove: yes
+
+- name: Use the custom keyboard map by default
+  lineinfile:
+    state: present
+    path: /etc/vconsole.conf
+    regexp: '^KEYMAP='
+    line: 'KEYMAP="{{ keymaps.macbook_pro }}"'
+
+- name: Load the custom keyboard map immediately
+  systemd:
+    state: restarted
+    name: systemd-vconsole-setup

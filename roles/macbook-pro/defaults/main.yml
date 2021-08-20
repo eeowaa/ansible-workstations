@@ -1,0 +1,4 @@
+---
+keymaps_dir: /usr/lib/kbd/keymaps/custom
+keymaps:
+  macbook_pro: us-macbook-pro

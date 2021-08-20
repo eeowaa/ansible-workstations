@@ -1,2 +1,3 @@
 ---
 - import_tasks: install-wifi.yml
+- import_tasks: configure-kbd.yml
