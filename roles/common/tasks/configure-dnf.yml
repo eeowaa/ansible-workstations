@@ -20,3 +20,21 @@
     value: 'True'
     no_extra_spaces: true
     backup: yes
+
+- name: Configure DNF to use the fastest download mirror
+  ini_file:
+    path: /etc/dnf/dnf.conf
+    section: main
+    option: fastestmirror
+    value: 'True'
+    no_extra_spaces: true
+    # backup: yes
+
+- name: Configure DNF to download up to 10 packages simultaneously
+  ini_file:
+    path: /etc/dnf/dnf.conf
+    section: main
+    option: max_parallel_downloads
+    value: '10'
+    no_extra_spaces: true
+    # backup: yes
