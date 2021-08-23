@@ -18,6 +18,11 @@ TFLAGS := -vK
 setup:
 	dnf install -y ansible ansible-lint
 
+# Install required roles from Ansible Galaxy
+.PHONY: deps
+deps:
+	ansible-galaxy install -r requirements.yml
+
 # Check the syntax of altered playbooks (validity + linting)
 .PHONY: check lint
 check: $(foreach playbook,$(playbooks),$(targetdir)/check-$(playbook))
