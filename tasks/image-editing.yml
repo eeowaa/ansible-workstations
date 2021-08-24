@@ -4,9 +4,13 @@
     state: present
     name:
       - gimp
+  tags:
+    - graphical
 
 - name: Install Inkscape
   dnf:
     state: present
     name:
       - inkscape
+  tags:
+    - graphical

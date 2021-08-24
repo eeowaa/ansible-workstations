@@ -17,6 +17,8 @@
     name:
       - meld
       # TODO: Add more tools
+  tags:
+    - graphical
 
 # Note that there is some overlap here with editing.yml
 - name: Install search tools
@@ -35,3 +37,5 @@
       - tmux
       - xterm
       - zsh
+  tags:
+    - graphical

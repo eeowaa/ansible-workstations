@@ -3,6 +3,8 @@
   dnf:
     state: present
     name: discord
+  tags:
+    - graphical
 
 - name: Install Weechat
   dnf:
@@ -13,6 +15,8 @@
   flatpak:
     state: present
     name: us.zoom.Zoom
+  tags:
+    - graphical
 
 # TODO: Install Slack
 # sudo ed <<EOF
