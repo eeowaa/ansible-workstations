@@ -45,11 +45,11 @@ clean:
 # Test a single Ansible role specified by $(ROLE)
 .PHONY: test-role
 test-role:
-	@test "X$(ROLE)" != X || { echo >&2 'Unset variable: ROLE'; exit 1; }
-	ansible-playbook -C -e role=$(ROLE) $(TFLAGS) $(playbookdir)/single-role.yml
+	@test 'X$(ROLE)' != X || { echo >&2 'Unset variable: ROLE'; exit 1; }
+	ansible-playbook -C -e role='$(ROLE)' $(TFLAGS) '$(playbookdir)/single-role.yml'
 
 # Test a single Ansible task list specified by $(FILE)
 .PHONY: test-tasks
 test-tasks:
-	@test "X$(FILE)" != X || { echo >&2 'Unset variable: FILE'; exit 1; }
-	ansible-playbook -C -e file=$(FILE) $(TFLAGS) $(playbookdir)/single-task-list.yml
+	@test 'X$(FILE)' != X || { echo >&2 'Unset variable: FILE'; exit 1; }
+	ansible-playbook -C -e file='$(FILE)' $(TFLAGS) '$(playbookdir)/single-task-list.yml'
