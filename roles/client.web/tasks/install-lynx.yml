@@ -1,0 +1,6 @@
+---
+# Lynx is my go-to browser in the virtual console
+- name: Install Lynx
+  dnf:
+    state: present
+    name: lynx

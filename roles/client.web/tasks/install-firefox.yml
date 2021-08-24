@@ -1,0 +1,10 @@
+---
+# This is part of the base Fedora install, but it's good to specify in case
+# this task list is used for other distros (or to bring us back to our desired
+# state after accidental removal of Firefox).
+- name: Install Mozilla Firefox
+  dnf:
+    state: present
+    name: firefox
+  tags:
+    - graphical

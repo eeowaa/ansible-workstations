@@ -1,0 +1,4 @@
+---
+- import_tasks: install-lynx.yml
+- import_tasks: install-firefox.yml
+- import_tasks: install-chrome.yml
