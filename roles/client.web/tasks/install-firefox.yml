@@ -8,3 +8,7 @@
     name: firefox
   tags:
     - graphical
+
+# FIXME: Must install the Tree Style Tabs plugin first
+- name: Configure Tree Style Tabs
+  script: tst-setup.sh
