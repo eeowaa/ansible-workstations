@@ -1,0 +1,7 @@
+---
+- name: Add user to jackuser group
+  user:
+    name: "{{ ansible_user }}"
+    groups: jackuser
+    append: yes
+  notify: 'Reset connection'
