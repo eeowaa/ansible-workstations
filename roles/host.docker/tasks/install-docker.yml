@@ -1,0 +1,12 @@
+---
+- name: Install Docker engine
+  dnf:
+    state: present
+    name:
+      - docker
+
+- name: Start Docker daemon
+  systemd:
+    enabled: true
+    state: started
+    name: docker

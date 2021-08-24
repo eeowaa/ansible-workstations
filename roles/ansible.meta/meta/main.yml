@@ -1,0 +1,4 @@
+---
+dependencies:
+  # Required to download the base Fedora image for testing playbooks
+  - role: host.docker
