@@ -1,0 +1,12 @@
+---
+# <https://stackoverflow.com/questions/31618967/how-do-i-write-an-ansible-handler-with-multiple-tasks>
+- name: Reboot
+  reboot:
+  when: ansible_connection != 'local'
+  listen: 'Reboot'
+
+- name: Reboot
+  debug:
+    msg: '*** RESTART THE COMPUTER TO APPLY CHANGES ***'
+  when: ansible_connection == 'local'
+  listen: 'Reboot'

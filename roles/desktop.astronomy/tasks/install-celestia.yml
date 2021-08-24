@@ -1,0 +1,8 @@
+---
+- name: Install Celestia
+  dnf:
+    state: present
+    name:
+      - celestia
+  tags:
+    - graphical

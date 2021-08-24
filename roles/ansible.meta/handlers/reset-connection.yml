@@ -1,0 +1,14 @@
+---
+# <https://serverfault.com/questions/930804/force-ansible-to-log-off-to-refresh-user-groups>
+# <https://docs.ansible.com/ansible/2.6/modules/meta_module.html>
+# <https://stackoverflow.com/questions/31618967/how-do-i-write-an-ansible-handler-with-multiple-tasks>
+- name: Reset connection
+  meta: reset_connection
+  when: ansible_connection != 'local'
+  listen: 'Reset connection'
+
+- name: Reset connection
+  debug:
+    msg: '*** LOG OUT AND BACK IN TO APPLY CHANGES ***'
+  when: ansible_connection == 'local'
+  listen: 'Reset connection'

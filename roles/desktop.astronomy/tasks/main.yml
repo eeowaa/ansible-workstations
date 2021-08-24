@@ -1,9 +1,3 @@
 ---
-- name: Install Celestia and Stellarium
-  dnf:
-    state: present
-    name:
-      - celestia
-      - stellarium
-  tags:
-    - graphical
+- import_tasks: install-cellestia.yml
+- import_tasks: install-stellarium.yml

@@ -1,0 +1,8 @@
+---
+- name: Install Stellarium
+  dnf:
+    state: present
+    name:
+      - stellarium
+  tags:
+    - graphical
