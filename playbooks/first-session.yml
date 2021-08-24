@@ -13,6 +13,6 @@
 
     - name: Install and configure specifics to Macbook Pro
       import_role:
-        name: macbook-pro
+        name: machine.macbook
       when: computer == 'Macbook Pro'
       notify: Reboot

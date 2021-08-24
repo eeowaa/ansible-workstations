@@ -1,0 +1,8 @@
+---
+- name: Install Ardour 5
+  dnf:
+    state: present
+    name: ardour5
+  notify: Add user to jackuser group
+  tags:
+    - graphical

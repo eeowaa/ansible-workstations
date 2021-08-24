@@ -1,4 +1,4 @@
 ---
 dependencies:
   # Required for flatpak configuration
-  - role: gnome-desktop
+  - role: desktop.gnome
