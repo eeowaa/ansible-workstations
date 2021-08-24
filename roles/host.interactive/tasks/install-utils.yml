@@ -4,5 +4,5 @@
     state: present
     name:
       - nmap
-      - the_silver_searcher
+      - ripgrep
       - tmux
