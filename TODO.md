@@ -1,0 +1,2 @@
+- `[ ]` Use vendoring via git submodules for Ansible Galaxy
+  - See the user guide on how to download via submodules

@@ -1,0 +1,45 @@
+# This file's task list is a hack that allows me to remove all matches of a
+# regex on a matching line. Unfortunately, Ansible doesn't have a single module
+# that can do that. The `lineinfile` and `replace` modules come close; here is
+# the best that they can do:
+#
+# 1. lineinfile: replace a single regex match on a matching line
+# 2. replace:    replace all regex matches across an entire file
+---
+- name: Read /etc/default/grub
+  slurp:
+    src: /etc/default/grub
+  register: grub
+
+- name: Extract the GRUB_CMDLINE_LINUX line from /etc/default/grub
+  set_fact:
+    cmdline_linux: "{{ grub['content'] | b64decode | regex_findall('GRUB_CMDLINE_LINUX=.*') }}"
+
+# - name: Remove "splash" and "rhgb" (Red Hat graphical boot) kernel parameters
+#   replace:
+#     path: /tmp/grub
+#     # regexp: '(?<=^GRUB_CMDLINE_LINUX=)(.*?) ?(?:splash|rhgb)\b'
+#     regexp: '(^GRUB_CMDLINE_LINUX=.*?) ?(?:splash|rhgb)\b'
+#     replace: '\1'
+#     backup: yes
+
+# - name: Remove "splash" and "rhgb" (Red Hat graphical boot) kernel parameters
+#   lineinfile:
+#     state: present
+#     path: /etc/default/grub
+#     regexp: '^(GRUB_CMDLINE_LINUX=.*?) ?rhgb\b(.*)'
+#     line: '\1\2'
+#     backrefs: yes
+#     backup: yes
+
+# - name: Store changes in GRUB config (assume Fedora on EFI)
+# > On EFI:  grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
+# > On BIOS: grub2-mkconfig -o /boot/grub2/grub.cfg
+#
+# - [ ] Determine programmatic way to discover which grub.cfg to write to
+#   - [ ] See if there is a direct command for this
+#   - [ ] Determine programmatic way to determine whether EFI or BIOS
+#   - [x] Determine programmatic way to determine system release
+#      - sed 's, release .*$,,g' /etc/system-release | tr A-Z a-z
+#   - [ ] Determine programmatic way to find EFI system partition (ESP) path
+#      - /boot/efi on my current machine, but sometimes it is /efi

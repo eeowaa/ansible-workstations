@@ -1,0 +1,8 @@
+---
+- name: Install Rust and Cargo via rustup
+  include_role:
+    name: robertdebock.cargo
+
+# TODO: Replace this command with an Ansible Galaxy module for Cargo
+- name: Install topgrade system upgrader
+  command: cargo install topgrade

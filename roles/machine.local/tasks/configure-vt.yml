@@ -1,0 +1,20 @@
+---
+# - [ ] Change vt.cur_default to solid block
+# - [ ] Change default colors
+#       vt.default_blu= [VT]
+#                       Format: <blue0>,<blue1>,<blue2>,...,<blue15>
+#                       Change the default blue palette of the console.
+#                       This is a 16-member array composed of values
+#                       ranging from 0-255.
+#
+#       vt.default_grn= [VT]
+#                       Format: <green0>,<green1>,<green2>,...,<green15>
+#                       Change the default green palette of the console.
+#                       This is a 16-member array composed of values
+#                       ranging from 0-255.
+#
+#       vt.default_red= [VT]
+#                       Format: <red0>,<red1>,<red2>,...,<red15>
+#                       Change the default red palette of the console.
+#                       This is a 16-member array composed of values
+#                       ranging from 0-255.

@@ -6,3 +6,4 @@
       prompt: Enter a passphrase for your new SSH key
   roles:
     - ssh-client
+    # TODO: Add more roles

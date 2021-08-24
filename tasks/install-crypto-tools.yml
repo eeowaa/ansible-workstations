@@ -1,0 +1,10 @@
+---
+- name: Install Bitwarden desktop client
+  flatpak:
+    state: present
+    name: com.bitwarden
+  tags:
+    - graphical
+
+# TODO: Install Bitwarden CLI
+# <https://bitwarden.com/help/article/cli/>

@@ -1,25 +1,25 @@
 ---
+# TODO: Dynamically find the most recent version and install that instead
 - name: Install mitmproxy 5.1.1
-  command:
+  shell:
     chdir: /tmp
     cmd: |
-      curl https://snapshots.mitmproxy.org/5.1.1/mitmproxy-5.1.1-linux.tar.gz -o mitmproxy.tar.gz
+      curl -s https://snapshots.mitmproxy.org/5.1.1/mitmproxy-5.1.1-linux.tar.gz -o mitmproxy.tar.gz
       tar -xzf mitmproxy.tar.gz -C /usr/local/bin
       rm mitmproxy.tar.gz
     creates: /usr/local/bin/mitmproxy
 
-- name: Install other network inspection tools
+- name: Install other CLI/TUI network inspection tools
   dnf:
     state: present
     name:
       - nmap
-      - wireshark
+      - wireshark-cli
 
-- name: Install alternate web browsers
+- name: Install graphical network inspection tools
   dnf:
     state: present
     name:
-      - chromium
-      - lynx
-      - netsurf
-      - w3m-img
+      - wireshark
+  tags:
+    - graphical

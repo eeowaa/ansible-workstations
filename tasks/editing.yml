@@ -13,3 +13,4 @@
       - emacs
       - fd-find
       - ripgrep
+      # TODO: Install other depenencies (not just RPMs)

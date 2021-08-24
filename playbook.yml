@@ -1,0 +1,23 @@
+- hosts: localhost
+  connection: local
+  tasks:
+
+    - debug:
+        msg: "ansible_user [{{ ansible_user }}]"
+      become: false
+    - file:
+        path: /tmp/foo
+        state: directory
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+      become: false
+
+    - debug:
+        msg: "ansible_user [{{ ansible_user }}]"
+      become: true
+    - file:
+        path: /tmp/bar
+        state: directory
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+      become: true

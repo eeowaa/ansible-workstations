@@ -4,7 +4,7 @@
     state: present
     name:
       - automake
-      - cargo
+#     - cargo
       - clang
       - cmake
       - g++
@@ -30,12 +30,28 @@
       - ripgrep
       - the_silver_searcher
 
-- name: Install terminal and shell tools
+# Bloat? Did somebody say "bloat"?!
+- name: Install shells
+  dnf:
+    state: present
+    name:
+      - dash
+      - fish
+      - ksh
+      - tcsh
+      - zsh
+
+- name: Install preferred terminal multiplexer
   dnf:
     state: present
     name:
       - tmux
+
+- name: Install preferred terminal emulator
+  dnf:
+    state: present
+    name:
       - xterm
-      - zsh
+      # TODO: Investigate other options (e.g. urxvt, st)
   tags:
     - graphical

@@ -1,0 +1,3 @@
+---
+- import_tasks: configure-vt.yml
+- import_tasks: disable-plymouth.yml
