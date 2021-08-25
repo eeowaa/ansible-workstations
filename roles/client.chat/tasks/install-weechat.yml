@@ -1,0 +1,5 @@
+---
+- name: Install Weechat
+  dnf:
+    state: present
+    name: weechat

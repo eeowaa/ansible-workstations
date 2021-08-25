@@ -1,0 +1,26 @@
+---
+- name: Import Packagecloud GPG key to RPMDB
+  rpm_key:
+    state: present
+    key: https://packagecloud.io/gpg.key
+  tags:
+    - graphical
+
+- name: Add Yum repo for Slack on Fedora x86_64
+  yum_repository:
+    file: slack
+    name: slack
+    description: Slack
+    baseurl: https://packagecloud.io/slacktechnologies/slack/fedora/21/x86_64
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: https://packagecloud.io/gpg.key
+  tags:
+    - graphical
+
+- name: Install Slack
+  dnf:
+    state: present
+    name: code
+  tags:
+    - graphical

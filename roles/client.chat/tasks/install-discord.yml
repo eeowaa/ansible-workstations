@@ -1,0 +1,7 @@
+---
+- name: Install Discord
+  dnf:
+    state: present
+    name: discord
+  tags:
+    - graphical
