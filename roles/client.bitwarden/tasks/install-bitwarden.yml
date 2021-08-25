@@ -1,0 +1,15 @@
+---
+- name: Install Bitwarden desktop client
+  vars: { ansible_become: false }
+  flatpak:
+    method: user
+    state: present
+    name: com.bitwarden
+  tags:
+    - graphical
+
+# https://bitwarden.com/help/article/cli/
+- name: Install Bitwarden CLI
+  npm:
+    name: '@bitwarden/cli'
+    global: yes
