@@ -1,0 +1,3 @@
+---
+- import_tasks: install-inkscape.yml
+- import_tasks: install-gimp.yml

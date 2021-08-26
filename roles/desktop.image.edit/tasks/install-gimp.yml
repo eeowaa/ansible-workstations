@@ -1,0 +1,8 @@
+---
+- name: Install GIMP
+  dnf:
+    state: present
+    name:
+      - gimp
+  tags:
+    - graphical

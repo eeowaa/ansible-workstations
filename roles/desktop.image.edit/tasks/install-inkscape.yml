@@ -1,12 +1,4 @@
 ---
-- name: Install GIMP
-  dnf:
-    state: present
-    name:
-      - gimp
-  tags:
-    - graphical
-
 - name: Install Inkscape
   dnf:
     state: present
