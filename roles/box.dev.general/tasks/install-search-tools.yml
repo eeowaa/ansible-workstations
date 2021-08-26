@@ -1,0 +1,9 @@
+---
+- name: Install search and finder tools
+  dnf:
+    state: present
+    name:
+      - fzf
+      - fd-find
+      - ripgrep
+      - the_silver_searcher

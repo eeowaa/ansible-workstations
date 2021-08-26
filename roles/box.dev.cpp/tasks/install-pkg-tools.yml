@@ -1,0 +1,7 @@
+---
+- name: Install packaging tools
+  dnf:
+    state: present
+    name:
+      - libtool
+      - pkgconf-pkg-config

@@ -6,6 +6,7 @@
       - tmux
       - nmap
 
+# TODO: Investigate other options (e.g. urxvt, st)
 - name: Install a terminal emulator (xterm)
   dnf:
     state: present

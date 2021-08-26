@@ -1,0 +1,4 @@
+---
+- import_tasks: install-build-tools.yml
+- import_tasks: install-debug-tools.yml
+- import_tasks: install-pkg-tools.yml

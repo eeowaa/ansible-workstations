@@ -1,0 +1,8 @@
+- name: Install Doom Emacs
+  dnf:
+    state: present
+    name:
+      - emacs
+      - fd-find
+      - ripgrep
+      # TODO: Install other depenencies (not just RPMs)

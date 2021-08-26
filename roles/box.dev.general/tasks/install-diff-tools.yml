@@ -1,0 +1,8 @@
+---
+- name: Install diff and merge tools
+  dnf:
+    state: present
+    name:
+      - meld
+  tags:
+    - graphical

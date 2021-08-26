@@ -1,5 +1,0 @@
----
-- name: Install 7zip
-  dnf:
-    state: present
-    name: p7zip

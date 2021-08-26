@@ -1,0 +1,10 @@
+---
+- name: Install build tools
+  dnf:
+    state: present
+    name:
+      - automake
+      - clang
+      - cmake
+      - gcc
+      - g++

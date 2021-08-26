@@ -1,0 +1,7 @@
+---
+- name: Install debug tools
+  dnf:
+    state: present
+    name:
+      - gdb
+      - valgrind

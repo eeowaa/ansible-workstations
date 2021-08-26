@@ -1,0 +1,9 @@
+---
+# IDEs
+- import_tasks: install-doom-emacs.yml
+- import_tasks: install-vscode.yml
+
+# Standalone tools
+- import_tasks: install-shells.yml
+- import_tasks: install-diff-tools.yml
+- import_tasks: install-search-tools.yml
