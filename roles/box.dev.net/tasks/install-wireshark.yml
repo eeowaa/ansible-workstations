@@ -1,0 +1,14 @@
+---
+- name: Install Wireshark
+  dnf:
+    state: present
+    name:
+      - wireshark
+  tags:
+    - graphical
+
+- name: Install Wireshark CLI
+  dnf:
+    state: present
+    name:
+      - wireshark-cli

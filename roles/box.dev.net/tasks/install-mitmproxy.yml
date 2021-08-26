@@ -1,0 +1,15 @@
+---
+# <https://docs.mitmproxy.org/stable/overview-installation/>
+# - Installation via pipx is the easiest method on Fedora Linux
+# - Supports mitmproxy addons that require additional python packages
+- name: Install mitmproxy
+  vars: { ansible_become: false }
+  command:
+    cmd: pipx install mitmproxy
+    creates: "{{ lookup('env', 'HOME') }}/.local/pipx/venvs/mitmproxy"
+
+# Use -e update=true to perform an update
+- name: Update mitmproxy
+  when: update
+  vars: { ansible_become: false }
+  command: pipx upgrade mitmproxy
