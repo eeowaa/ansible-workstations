@@ -1,8 +1,15 @@
 ---
-- name: Install utilities
+- name: Install essential interactive utilities
   dnf:
     state: present
     name:
-      - nmap
-      - ripgrep
       - tmux
+      - nmap
+
+- name: Install a terminal emulator (xterm)
+  dnf:
+    state: present
+    name:
+      - xterm
+  tags:
+    - graphical

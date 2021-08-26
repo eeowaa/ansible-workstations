@@ -1,7 +1,8 @@
 ---
-- name: Install basic editors
+- name: Install basic text editors
   dnf:
     state: present
     name:
       - ed
       - vim-enhanced
+      - emacs
