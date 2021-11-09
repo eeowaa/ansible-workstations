@@ -1,0 +1,16 @@
+---
+- name: Install CLI client to control brightness of devices
+  dnf:
+    state: present
+    name: brightnessctl
+
+# TODO: Bind the following keycodes to the following scripts (keysym inbetween?)
+# keycode 224 (KEY_BRIGHTNESSDOWN) -> brightnessctl -d intel_backlight    set 10%-
+# keycode 225 (KEY_BRIGHTNESSUP)   -> brightnessctl -d intel_backlight    set 10%+
+# keycode 229 (KEY_KBDILLUMDOWN)   -> brightnessctl -d smc::kbd_backlight set 10%-
+# keycode 230 (KEY_KBDILLUMUP)     -> brightnessctl -d smc::kbd_backlight set 10%+
+#
+# event device for keyboard:
+# /dev/input/by-id/usb-Apple_Inc._Apple_Internal_Keyboard___Trackpad-event-kbd
+
+# Set vt.cur_default in grub

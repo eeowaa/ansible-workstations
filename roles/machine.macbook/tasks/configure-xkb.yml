@@ -1,0 +1,62 @@
+---
+- name: Check for existence of custom xkb symbols
+  stat:
+    path: "{{ xkb_symbols_dir }}/{{ xkb_symbols }}"
+  register: symbols
+
+- name: Install the custom xkb symbols
+  when: not symbols.stat.exists
+  copy:
+    src: "{{ role_path }}/files/{{ xkb_symbols }}.symbols"
+    dest: "{{ xkb_symbols_dir }}/{{ xkb_symbols }}"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Edit evdev
+  lineinfile:
+    state: present
+    path: "{{ xkb_rules_dir }}/evdev"
+    insertafter: '^! *option *= *symbol *$'
+    line: '  eeowaa:macbook = +eeowaa(macbook)'
+
+- name: Edit evdev.lst
+  blockinfile:
+    state: present
+    path: "{{ xkb_rules_dir }}/evdev.lst"
+    insertafter: '^! *option *$'
+    marker: '! {mark} ANSIBLE MANAGED BLOCK'
+    block: |-
+      eeowaa               Custom modifier mappings
+      eeowaa:macbook       Mappings for broken Macbook Pro keyboard
+
+# FIXME
+- name: Edit evdev.xml (1/3)
+  xml:
+    state: present
+    path: "{{ xkb_rules_dir }}/evdev.xml"
+    xpath: //xkbConfigRegistry/optionList/group
+    attribute: allowMultipleSelection
+    value: 'true'
+    add_children:
+
+# FIXME
+- name: Edit evdev.xml (2/3)
+  xml:
+    state: present
+    path: "{{ xkb_rules_dir }}/evdev.xml"
+    xpath: //xkbConfigRegistry/optionList/group/option/configItem
+    add_children:
+      - name: eeowaa
+      - description: 'Custom modifier mappings'
+
+# FIXME
+- name: Edit evdev.xml (3/3)
+  xml:
+    state: present
+    path: "{{ xkb_rules_dir }}/evdev.xml"
+    xpath: '//xkbConfigRegistry/optionList/group/option/configItem'
+    insertafter: true
+    add_children:
+      - name: eeowaa:macbook
+      - description: 'Mappings for broken Macbook Pro keyboard'
