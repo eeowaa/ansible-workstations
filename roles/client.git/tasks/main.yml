@@ -1,3 +1,4 @@
 ---
 - import_tasks: add-known-hosts.yml
 - import_tasks: configure-user.yml
+- import_tasks: install-gh.yml

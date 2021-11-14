@@ -1,0 +1,20 @@
+---
+- name: Import Ubuntu keyserver GPG key to RPMDB
+  rpm_key:
+    state: present
+    key: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xc99b11deb97541f0
+
+- name: Add Yum repo for GitHub CLI
+  yum_repository:
+    file: gh-cli
+    name: gh-cli
+    description: packages for the GitHub CLI
+    baseurl: https://cli.github.com/packages/rpm
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xc99b11deb97541f0
+
+- name: Install gh
+  dnf:
+    state: present
+    name: gh
