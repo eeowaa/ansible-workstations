@@ -1,0 +1,15 @@
+- name: Check for existence of our desired font
+  find:
+    paths: '{{ fonts_dir }}'
+    use_regex: yes
+    patterns:
+      - '^{{ fonts.macbook_pro }}\.(?:.+\.)?gz$'
+  register: font_files
+
+- name: Use our desired font in the virtual console
+  lineinfile:
+    state: present
+    path: /etc/vconsole.conf
+    regexp: '^FONT='
+    line: 'FONT="{{ fonts.macbook_pro }}"'
+  when: font_files.matched == 1
