@@ -1,8 +1,43 @@
-- name: Install Doom Emacs
-  dnf:
+---
+# FIXME: Duplicate task (also in roles/host.interactive/tasks/install-editors.yml)
+- name: Install Emacs with native compilation
+  block:
+  - command:
+      cmd:
+        dnf copr enable deathwish/emacs-pgtk-nativecomp
+        dnf update
+      creates: /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:deathwish:emacs-pgtk-nativecomp.repo
+  - dnf:
     state: present
     name:
       - emacs
+
+- name: Install dependencies for Doom Emacs
+  dnf:
+    state: present
+    name:
+      - git
+      - findutils
       - fd-find
       - ripgrep
-      # TODO: Install other depenencies (not just RPMs)
+
+- name: Clone Doom Emacs
+  vars: { ansible_become: false }
+  git:
+    repo: git@github.com:doomemacs/doomemacs.git
+    dest: "{{ lookup('env', 'HOME') }}/.config/emacs"
+
+- name: Install Doom Emacs
+  vars: { ansible_become: false }
+  command:
+    cmd: "{{ lookup('env', 'HOME') }}/.config/emacs/bin/doom install"
+
+- name: Ensure proper installation of Doom Emacs
+  vars: { ansible_become: false }
+  command:
+    cmd: "{{ lookup('env', 'HOME') }}/.config/emacs/bin/doom doctor"
+
+- name: Install dependencies for Doom Emacs modules
+  vars: { ansible_become: false }
+  command:
+    cmd: "{{ lookup('env', 'HOME') }}/.config/doom/install/run"
