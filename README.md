@@ -22,7 +22,7 @@ ansible-playbook -vK playbooks/home-computer.yml
 
 This goal of this **work-in-progress** repository is to have a set of Ansible
 playbooks for provisioning my personal and professional workstations.
-Fedora 34 will be the first supported operating system, with Amazon Linux 2
+Fedora 36 will be the first supported operating system, with Amazon Linux 2
 following close behind.
 
 # SEE ALSO

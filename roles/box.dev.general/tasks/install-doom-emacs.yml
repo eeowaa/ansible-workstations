@@ -1,16 +1,10 @@
 ---
 # FIXME: Duplicate task (also in roles/host.interactive/tasks/install-editors.yml)
 - name: Install Emacs with native compilation
-  block:
-  - command:
-      cmd:
-        dnf copr enable deathwish/emacs-pgtk-nativecomp
-        dnf update
-      creates: /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:deathwish:emacs-pgtk-nativecomp.repo
   - dnf:
     state: present
     name:
-      - emacs
+      - emacs # Fedora 36 now packages Emacs 28.1 with native compilation
 
 - name: Install dependencies for Doom Emacs
   dnf:

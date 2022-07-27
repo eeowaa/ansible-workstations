@@ -1,8 +1,8 @@
 ---
-- name: Install basic text editors
+- name: Install text editors
   dnf:
     state: present
     name:
       - ed
       - vim-enhanced
-      - emacs
+      - emacs # Fedora 36 now packages Emacs 28.1 with native compilation
