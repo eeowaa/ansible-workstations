@@ -10,3 +10,5 @@
     enabled: true
     state: started
     name: docker
+
+# TODO: Run as non-root user

@@ -1,4 +1,10 @@
 ---
+- name: Install dependencies for mitmproxy
+  dnf:
+    state: present
+    name:
+      - python3-devel
+
 # <https://docs.mitmproxy.org/stable/overview-installation/>
 # - Installation via pipx is the easiest method on Fedora Linux
 # - Supports mitmproxy addons that require additional python packages

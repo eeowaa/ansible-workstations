@@ -5,12 +5,11 @@
     name:
       - tmux
       - nmap
+      - htop
 
-# TODO: Investigate other options (e.g. urxvt, st)
-- name: Install a terminal emulator (xterm)
+- name: Install debugging utilities
   dnf:
     state: present
     name:
-      - xterm
-  tags:
-    - graphical
+      - strace
+      - ltrace

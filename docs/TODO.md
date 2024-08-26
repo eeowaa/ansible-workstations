@@ -97,6 +97,9 @@ without actually elevating our permissions.  Unfortunately, this adds another
 prerequisite to be installed in the `setup` target of the Makefile.  Another
 option would be to investigate running `dnf` without root permissions.
 
+See <https://github.com/rootless-containers/rootlesskit> for a Linux-native
+implementation of fakeroot.
+
 # TODO: Fix playbooks that fail in `make check`
 
 Currently, there are some failures due to required variables missing.  Either
