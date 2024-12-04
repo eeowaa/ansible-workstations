@@ -1,8 +1,11 @@
-# Use a Bourne-compatible shell; do not rely on other shell-isms
+# Use a Bourne-compatible shell with the typical prefix for tracing output
 SHELL := /bin/sh
+null :=
+space := $(null) $(null)
+export PS4 := +$(space)
 
-# Directory to store empty target files
-targetdir := .make
+# Directory to store empty target files for Makefile rules
+export CACHEDIR := .cache
 
 # Playbook directory and files
 playbookdir := playbooks
@@ -19,26 +22,26 @@ setup:
 	dnf install -y ansible ansible-lint
 	if test -f requirements.yml; then ansible-galaxy install -r requirements.yml; fi
 
-# Check the syntax of altered playbooks (validity + linting)
-.PHONY: check lint
-check: $(foreach playbook,$(playbooks),$(targetdir)/check-$(playbook))
-lint: $(foreach playbook,$(playbooks),$(targetdir)/lint-$(playbook))
+# Perform static analysis of playbooks
+.PHONY: check lint clean
+check: $(foreach playbook,$(playbooks),$(CACHEDIR)/check-$(playbook))
+lint: $(foreach playbook,$(playbooks),$(CACHEDIR)/lint-$(playbook))
+clean: $(foreach playbook,$(playbooks),clean-$(playbook))
+	-@set -x; rmdir "$${CACHEDIR}"
 define defrules
-$(targetdir)/check-$1: $(playbookdir)/$1
-	@echo '! Checking syntax of playbook: $$<'
+$(CACHEDIR)/check-$1: $(playbookdir)/$1
+	@printf '! Checking syntax of playbook: $$<\n$(PS4)'
 	ANSIBLE_HOST_PATTERN_MISMATCH=ignore ansible-playbook --syntax-check $$<
 	@mkdir -p $$(@D) && touch $$@
-$(targetdir)/lint-$1: $(playbookdir)/$1
-	@echo '! Linting playbook: $$<'
+$(CACHEDIR)/lint-$1: $(playbookdir)/$1
+	@printf '! Linting playbook: $$<\n$(PS4)'
 	ansible-lint $$<
 	@mkdir -p $$(@D) && touch $$@
+.PHONY: clean-$1
+clean-$1:
+	-@set -x; rm -f "$$$${CACHEDIR}/check-$1" "$$$${CACHEDIR}/lint-$1"
 endef
 $(foreach playbook,$(playbooks),$(eval $(call defrules,$(playbook))))
-
-# Remove directory containing empty target files
-.PHONY: clean
-clean:
-	rm -rf $(targetdir)
 
 # Run a $(TARGET) role in isolation
 .PHONY: role
