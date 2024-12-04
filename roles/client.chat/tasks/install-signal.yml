@@ -1,0 +1,20 @@
+---
+- name: Install Signal
+  vars: { ansible_become: false }
+  flatpak:
+    method: user
+    state: present
+    name: org.signal.Signal
+  tags:
+    - graphical
+  register: signal
+
+- name: Configure Signal password store
+  vars: { ansible_become: false }
+  command:
+    argv:
+      - /usr/bin/flatpak
+      - override
+      - --user
+      - --env=SIGNAL_PASSWORD_STORE=gnome-libsecret
+      - org.signal.Signal

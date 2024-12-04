@@ -1,5 +1,6 @@
 ---
-- import_tasks: install-weechat.yml
 - import_tasks: install-discord.yml
+- import_tasks: install-signal.yml
 - import_tasks: install-slack.yml
+- import_tasks: install-weechat.yml
 - import_tasks: install-zoom.yml
