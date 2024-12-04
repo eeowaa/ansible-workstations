@@ -3,5 +3,5 @@
   user:
     name: "{{ ansible_user }}"
     groups: jackuser
-    append: yes
+    append: true
   notify: 'Reset connection'

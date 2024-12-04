@@ -1,6 +1,6 @@
 ---
 - name: Install GIMP
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name:
       - gimp

@@ -1,5 +1,5 @@
 # Directory containing empty target files for Makefile rules
-/.make/
+/.cache/
 
 # Directory containing roles and collections downloaded from Ansible Galaxy
 /.galaxy/

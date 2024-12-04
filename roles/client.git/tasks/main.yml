@@ -1,4 +1,7 @@
 ---
-- import_tasks: add-known-hosts.yml
-- import_tasks: configure-user.yml
-- import_tasks: install-gh.yml
+- name: Include tasks defined in this role
+  ansible.builtin.include_tasks: "{{ item }}"
+  loop:
+    - add-known-hosts.yml
+    - configure-user.yml
+    - install-gh.yml

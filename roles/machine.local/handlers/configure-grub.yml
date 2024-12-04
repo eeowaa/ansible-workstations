@@ -1,0 +1,11 @@
+---
+- name: Generate a GRUB configuration file
+  shell: |
+    if [ -d /sys/firmware/efi ]
+    then grubcfg={{ esp }}/EFI/fedora/grub.cfg
+    else grubcfg=/boot/grub2/grub.cfg
+    fi
+    if [ -f $grubcfg ]
+    then grub2-mkconfig -o $grubcfg
+    else echo >&2 "Missing file: $grubcfg"; exit 1
+    fi

@@ -1,3 +1,6 @@
 ---
-- import_tasks: install-wireshark.yml
-- import_tasks: install-mitmproxy.yml
+- name: Include tasks defined in this role
+  ansible.builtin.include_tasks: "{{ item }}"
+  loop:
+    - install-wireshark.yml
+    - install-mitmproxy.yml

@@ -1,0 +1,5 @@
+---
+- name: Include tasks defined in this role
+  ansible.builtin.include_tasks: "{{ item }}"
+  loop:
+    - view-filesystems.yml

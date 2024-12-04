@@ -2,13 +2,13 @@
 # This allows you to see Wi-Fi networks and attempt to log in,
 # but you will not be able to connect to any of them
 - name: Install Broadcom wireless driver
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name: broadcom-wl
 
 # <https://fedoraproject.org/wiki/Common_F30_bugs#broadcom-wl-mesh>
 - name: Fix WPA supplicant
-  command:
+  ansible.builtin.command:
     cmd: |
       dnf copr enable dcaratti/wpa_supplicant
       dnf update

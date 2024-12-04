@@ -1,6 +1,6 @@
 ---
 - name: Check for existence of /usr/local/bin/aws
-  stat:
+  ansible.builtin.stat:
     path: /usr/local/bin/aws
   register: aws
 
@@ -10,23 +10,26 @@
   block:
     # TODO: Support other architectures and platforms
     - name: Download AWS CLI v2 zipfile
-      tags: awscli
-      get_url:
+      ansible.builtin.get_url:
         url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
         dest: /tmp/awscliv2.zip
+      tags:
+        - awscli
 
     - name: Extract AWS CLI v2 zipfile
-      tags: awscli
-      unarchive:
+      ansible.builtin.unarchive:
         src: /tmp/awscliv2.zip
         dest: /tmp
         creates: /tmp/aws/install
+      tags:
+        - awscli
 
     # Using `changed_when: ...` is preferred over `creates: /usr/local/bin/aws`
     # because the former allows AWS CLI v2 updates while the latter does not.
     - name: Run AWS CLI v2 install script
-      tags: awscli
-      command: /tmp/aws/install -u
+      ansible.builtin.command: /tmp/aws/install -u
       register: result
       changed_when: "result.stdout == 'You can now run: /usr/local/bin/aws --version'"
       notify: Remove AWS CLI v2 temporary files
+      tags:
+        - awscli

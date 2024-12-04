@@ -1,0 +1,7 @@
+---
+# EFI system partition
+esp: /boot/efi
+
+# Linux console cursor escape sequence
+# <https://linuxgazette.net/137/anonymous.html>
+cursor: 0

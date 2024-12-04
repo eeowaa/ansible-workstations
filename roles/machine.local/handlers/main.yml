@@ -1,0 +1,5 @@
+---
+- name: Import handlers defined in this role
+  block:
+    - name: Statically import tasks from configure-grub.yml
+      ansible.builtin.import_tasks: configure-grub.yml

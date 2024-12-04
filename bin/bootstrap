@@ -4,10 +4,13 @@ test `id -u` -eq 0 || {
     echo >&2 'ERROR: you must run this command with root privileges'
     exit 1
 }
+cd "`git rev-parse --show-toplevel`"
 
 # To run playbooks locally, we need Ansible
 dnf -y install ansible
+if test -f requirements.yml; then
+    ansible-galaxy install -r requirements.yml
+fi
 
 # Need to perform one-time operations (will restart computer)
-cd "`git rev-parse --show-toplevel`"
-ansible-playbook -v first-session.yml
+ansible-playbook -v playbooks/first-session.yml

@@ -1,8 +1,7 @@
 ---
-- name: Install text editors
-  dnf:
+- name: Install basic text editors
+  ansible.builtin.dnf:
     state: present
     name:
       - ed
       - vim-enhanced
-      - emacs # Fedora 36 now packages Emacs 28.1 with native compilation

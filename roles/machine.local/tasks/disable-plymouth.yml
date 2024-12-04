@@ -1,0 +1,31 @@
+# The following task list implements a hack to remove all matches of a regex
+# on a matching line. Unfortunately, Ansible doesn't have a single module that
+# can do that. The `lineinfile` and `replace` modules come close; here is the
+# best that they can do:
+#
+# 1. lineinfile: replace a single regex match on a matching line
+# 2. replace:    replace all regex matches across an entire file
+---
+- name: Read /etc/default/grub
+  ansible.builtin.slurp:
+    src: /etc/default/grub
+  register: grub
+
+- name: Extract the GRUB_CMDLINE_LINUX line and remove "splash" and "rhgb"
+  ansible.builtin.set_fact:
+    cmdline_linux_nosplash: >-
+      {{
+         grub['content'] |
+         b64decode |
+         regex_search('^GRUB_CMDLINE_LINUX=.*', multiline=True) |
+         regex_replace(' ?(?:splash|rhgb)', '')
+      }}
+
+- name: Replace the GRUB_CMDLINE_LINUX line in /etc/default/grub
+  ansible.builtin.lineinfile:
+    state: present
+    path: /etc/default/grub
+    regexp: '^GRUB_CMDLINE_LINUX='
+    line: "{{ cmdline_linux_nosplash }}"
+    backup: true
+  notify: Update GRUB configuration

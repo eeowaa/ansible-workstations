@@ -1,5 +1,9 @@
 ---
-# - import_tasks: install-wifi.yml
-# - import_tasks: configure-backlight.yml
-# - import_tasks: configure-kbd.yml
-- import_tasks: configure-xkb.yml
+- name: Include tasks defined in this role
+  ansible.builtin.include_tasks: "{{ item }}"
+  loop: []
+    # FIXME: Include task lists once properly specified
+    # - install-wifi.yml
+    # - configure-backlight.yml
+    # - configure-kbd.yml
+    # - configure-xkb.yml

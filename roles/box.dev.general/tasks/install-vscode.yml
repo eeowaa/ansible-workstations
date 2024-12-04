@@ -1,27 +1,27 @@
 ---
 - name: Import Microsoft GPG key to RPMDB
-  rpm_key:
+  ansible.builtin.rpm_key:
     state: present
     key: https://packages.microsoft.com/keys/microsoft.asc
 
 - name: Add Yum repo for Microsoft Visual Studio Code
-  yum_repository:
+  ansible.builtin.yum_repository:
     file: vscode
     name: code
     description: Visual Studio Code
     baseurl: https://packages.microsoft.com/yumrepos/vscode
-    enabled: yes
-    gpgcheck: yes
+    enabled: true
+    gpgcheck: true
     gpgkey: https://packages.microsoft.com/keys/microsoft.asc
 
 - name: Install Visual Studio Code - Microsoft RPM
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name: code
 
 - name: Install Visual Studio Code - OSS Flatpak
   vars: { ansible_become: false }
-  flatpak:
+  community.general.flatpak:
     method: user
     state: present 
     name: app/com.visualstudio.code-oss/x86_64/stable

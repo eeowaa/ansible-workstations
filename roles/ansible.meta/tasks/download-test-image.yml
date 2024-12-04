@@ -1,5 +1,5 @@
 ---
 - name: Download the base Docker image for testing ansible-workstations
-  docker_image:
+  community.docker.docker_image:
     name: "{{ test_image }}"
     source: pull

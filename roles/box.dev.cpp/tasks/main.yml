@@ -1,4 +1,7 @@
 ---
-- import_tasks: install-build-tools.yml
-- import_tasks: install-debug-tools.yml
-- import_tasks: install-pkg-tools.yml
+- name: Include tasks defined in this role
+  ansible.builtin.include_tasks: "{{ item }}"
+  loop:
+    - install-build-tools.yml
+    - install-debug-tools.yml
+    - install-pkg-tools.yml

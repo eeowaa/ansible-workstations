@@ -1,6 +1,6 @@
 ---
 - name: Install Wireshark
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name:
       - wireshark
@@ -8,7 +8,7 @@
     - graphical
 
 - name: Install Wireshark CLI
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name:
       - wireshark-cli

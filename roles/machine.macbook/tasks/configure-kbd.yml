@@ -7,7 +7,7 @@
 # keycode (125) from Alt to Control.
 ---
 - name: Check for existence of gzipped custom keyboard map
-  stat:
+  ansible.builtin.stat:
     path: "{{ keymaps_dir }}/{{ keymaps.macbook_pro }}.map.gz"
   register: keymap
 
@@ -15,34 +15,35 @@
   when: not keymap.stat.exists
   block:
     - name: Create a directory for custom keyboard maps
-      file:
+      ansible.builtin.file:
         state: directory
         path: "{{ keymaps_dir }}"
         owner: root
         group: root
-        mode: 0755
+        mode: "0755"
 
     - name: Install the uncompressed .map file
-      copy:
+      ansible.builtin.copy:
         src: "{{ role_path }}/files/{{ keymaps.macbook_pro }}.map"
         dest: "{{ keymaps_dir }}/{{ keymaps.macbook_pro }}.map"
         owner: root
         group: root
-        mode: 0644
+        mode: "0644"
 
     - name: Compress the .map file (.map.gz)
-      archive:
+      community.general.archive:
         path: "{{ keymaps_dir }}/{{ keymaps.macbook_pro }}.map"
-        remove: yes
+        mode: "0644"
+        remove: true
 
 - name: Use the custom keyboard map by default
-  lineinfile:
+  ansible.builtin.lineinfile:
     state: present
     path: /etc/vconsole.conf
     regexp: '^KEYMAP='
     line: 'KEYMAP="{{ keymaps.macbook_pro }}"'
 
 - name: Load the custom keyboard map immediately
-  systemd:
+  ansible.builtin.systemd_service:
     state: restarted
     name: systemd-vconsole-setup

@@ -1,15 +1,22 @@
 ---
 - name: Install essential interactive utilities
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name:
       - tmux
       - nmap
       - htop
 
-- name: Install debugging utilities
-  dnf:
+- name: Install troubleshooting tools
+  ansible.builtin.dnf:
     state: present
     name:
       - strace
       - ltrace
+
+# TODO: Investigate other options (e.g. urxvt, st)
+- name: Install a terminal emulator (xterm)
+  ansible.builtin.dnf:
+    state: present
+    name:
+      - xterm

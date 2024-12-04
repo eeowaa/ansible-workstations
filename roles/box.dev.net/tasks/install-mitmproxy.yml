@@ -10,7 +10,7 @@
 # - Supports mitmproxy addons that require additional python packages
 - name: Install mitmproxy
   vars: { ansible_become: false }
-  command:
+  ansible.builtin.command:
     cmd: pipx install mitmproxy
     creates: "{{ lookup('env', 'HOME') }}/.local/pipx/venvs/mitmproxy"
 
@@ -18,4 +18,4 @@
 - name: Update mitmproxy
   when: update
   vars: { ansible_become: false }
-  command: pipx upgrade mitmproxy
+  ansible.builtin.command: pipx upgrade mitmproxy

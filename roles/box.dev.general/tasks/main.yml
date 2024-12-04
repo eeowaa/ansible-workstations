@@ -1,9 +1,12 @@
 ---
-# IDEs
-- import_tasks: install-doom-emacs.yml
-- import_tasks: install-vscode.yml
+- name: Include tasks defined in this role
+  ansible.builtin.include_tasks: "{{ item }}"
+  loop:
+    # IDEs
+    - install-doom-emacs.yml
+    - install-vscode.yml
 
-# Standalone tools
-- import_tasks: install-shells.yml
-- import_tasks: install-diff-tools.yml
-- import_tasks: install-search-tools.yml
+    # Standalone tools
+    - install-shells.yml
+    - install-diff-tools.yml
+    - install-search-tools.yml

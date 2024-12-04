@@ -3,7 +3,7 @@
 # this task list is used for other distros (or to bring us back to our desired
 # state after accidental removal of Firefox).
 - name: Install Mozilla Firefox
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name: firefox
   tags:
@@ -11,4 +11,4 @@
 
 # FIXME: Must install the Tree Style Tabs plugin first
 - name: Configure Tree Style Tabs
-  script: tst-setup.sh
+  ansible.builtin.script: tst-setup.sh

@@ -1,6 +1,6 @@
 ---
 - name: Install A/V codecs
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name:
       - gstreamer1-plugin-openh264

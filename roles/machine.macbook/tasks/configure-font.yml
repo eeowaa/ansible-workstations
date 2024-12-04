@@ -1,13 +1,13 @@
 - name: Check for existence of our desired font
-  find:
+  ansible.builtin.find:
     paths: '{{ fonts_dir }}'
-    use_regex: yes
+    use_regex: true
     patterns:
       - '^{{ fonts.macbook_pro }}\.(?:.+\.)?gz$'
   register: font_files
 
 - name: Use our desired font in the virtual console
-  lineinfile:
+  ansible.builtin.lineinfile:
     state: present
     path: /etc/vconsole.conf
     regexp: '^FONT='

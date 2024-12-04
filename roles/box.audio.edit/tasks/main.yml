@@ -1,2 +1,5 @@
 ---
-- import_tasks: install-ardour.yml
+- name: Include tasks defined in this role
+  ansible.builtin.include_tasks: "{{ item }}"
+  loop:
+    - install-ardour.yml

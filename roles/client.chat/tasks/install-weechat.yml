@@ -1,5 +1,5 @@
 ---
 - name: Install Weechat
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name: weechat

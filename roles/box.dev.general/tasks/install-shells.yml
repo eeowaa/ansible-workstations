@@ -1,6 +1,6 @@
 ---
 - name: Install shells
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name:
       - dash

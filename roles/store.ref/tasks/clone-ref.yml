@@ -1,0 +1,13 @@
+---
+- name: Clone documentation repo to ~/Documents/ref
+  vars: { ansible_become: false }
+  ansible.builtin.git:
+    repo: git@github.com:eeowaa/ref.git
+    dest: "{{ lookup('env', 'HOME') }}/Documents/ref"
+
+- name: Symlink ~/Documents/ref to ~/ref
+  vars: { ansible_become: false }
+  ansible.builtin.file:
+    state: link
+    src:  "{{ lookup('env', 'HOME') }}/Documents/ref"
+    dest: "{{ lookup('env', 'HOME') }}/ref"

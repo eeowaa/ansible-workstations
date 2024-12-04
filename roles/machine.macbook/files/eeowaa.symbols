@@ -4,19 +4,12 @@
 partial modifier_keys
 xkb_symbols "macbook" {
 
-    // Left Command -> Control
-    key <LWIN> { [ Control_L, Control_R ] };
-    modifier_map Control { <LWIN> };
+    // Swap Left Command with Left Control
+    include "ctrl(swap_lwin_lctl)"
 
-    // Right Command -> Alt
-    key <RWIN> { [ Alt_L, Alt_R ] };
-    modifier_map Mod1 { <RWIN> };
+    // Swap Right Option with Right Command
+    include "altwin(swap_ralt_rwin)"
 
-    // Left Option -> Nothing
-    key <LALT> { [ ] };
-    modifier_map none { <LALT> };
-
-    // Right Option -> Right Command
-    key <RALT> { [ Super_L, Super_R ] };
-    modifier_map Mod4 { <RALT> };
+    // Disable Left Option
+    key <LALT> { [ VoidSymbol ] };
 }

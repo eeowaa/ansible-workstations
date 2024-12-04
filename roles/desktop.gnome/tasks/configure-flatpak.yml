@@ -1,7 +1,7 @@
 ---
 - name: Add the flathub Flatpak repository remote to the user installation
   vars: { ansible_become: false }
-  flatpak_remote:
+  community.general.flatpak_remote:
     method: user
     state: present
     name: flathub
@@ -9,7 +9,7 @@
 
 - name: Install Flatseal to manage Flatpak permissions
   vars: { ansible_become: false }
-  flatpak:
+  community.general.flatpak:
     method: user
     state: present
     name: com.github.tchx84.Flatseal

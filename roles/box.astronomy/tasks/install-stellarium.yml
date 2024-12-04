@@ -1,6 +1,6 @@
 ---
 - name: Install Stellarium
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name:
       - stellarium

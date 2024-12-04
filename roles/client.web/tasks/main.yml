@@ -1,4 +1,7 @@
 ---
-- import_tasks: install-lynx.yml
-- import_tasks: install-firefox.yml
-- import_tasks: install-chrome.yml
+- name: Include tasks defined in this role
+  ansible.builtin.include_tasks: "{{ item }}"
+  loop:
+    - install-lynx.yml
+    - install-firefox.yml
+    - install-chrome.yml

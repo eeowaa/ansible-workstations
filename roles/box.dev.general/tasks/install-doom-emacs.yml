@@ -1,13 +1,13 @@
 ---
-# FIXME: Duplicate task (also in roles/host.interactive/tasks/install-editors.yml)
-- name: Install Emacs with native compilation
-  - dnf:
+# FIXME: Ensure the correct version of Emacs is installed
+- name: Install the latest Emacs from Fedora package repositories
+  ansible.builtin.dnf:
     state: present
     name:
-      - emacs # Fedora 36 now packages Emacs 28.1 with native compilation
+      - emacs
 
 - name: Install dependencies for Doom Emacs
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name:
       - git

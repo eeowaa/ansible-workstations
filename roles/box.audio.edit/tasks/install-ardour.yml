@@ -1,6 +1,6 @@
 ---
 - name: Install Ardour 6
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name: ardour6
   notify: Add user to jackuser group

@@ -1,2 +1,5 @@
 ---
-- import_tasks: configure-dnf.yml
+- name: Include tasks defined in this role
+  ansible.builtin.include_tasks: "{{ item }}"
+  loop:
+    - configure-dnf.yml

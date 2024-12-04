@@ -1,2 +1,5 @@
 ---
-- include: postinstall-ardour.yml
+- name: Import handlers defined in this role
+  block:
+    - name: Statically import tasks from postinstall-ardour.yml
+      ansible.builtin.import_tasks: postinstall-ardour.yml

@@ -1,3 +1,8 @@
 ---
-- include: reset-connection.yml
-- include: reboot.yml
+- name: Import handlers defined in this role
+  block:
+    - name: Statically import tasks from reset-connection.yml
+      ansible.builtin.import_tasks: reset-connection.yml
+
+    - name: Statically import tasks from reboot.yml
+      ansible.builtin.import_tasks: reboot.yml
