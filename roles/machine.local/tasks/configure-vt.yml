@@ -1,0 +1,34 @@
+---
+# <https://stackoverflow.com/questions/29075287/ansible-insert-line-if-not-exists>
+- name: Check for vt.cur_default parameter in /etc/default/grub
+  ansible.builtin.lineinfile:
+    state: absent
+    path: /etc/default/grub
+    regexp: '^GRUB_CMDLINE_LINUX=.*\bvt\.cur_default=.*'
+  check_mode: true
+  changed_when: false
+  register: check
+
+# vt.cur_default is present
+- name: Ensure that vt.cursor_default is set properly
+  when: check.found == 1
+  ansible.builtin.lineinfile:
+    state: present
+    path: /etc/default/grub
+    regexp: '^(GRUB_CMDLINE_LINE=.*\bvt\.cur_default=)[^ ]+( ?.*)'
+    line: '\1{{ cursor }}\2'
+    backrefs: true
+    backup: true
+  notify: Generate a GRUB configuration file
+
+# vt.cur_default is missing
+- name: Ensure that vt.cursor_default is set properly
+  when: check.found == 0
+  ansible.builtin.lineinfile:
+    state: present
+    path: /etc/default/grub
+    regexp: '^(GRUB_CMDLINE_LINE=.*) *$'
+    line: '\1 {{ cursor }}'
+    backrefs: true
+    backup: true
+  notify: Generate a GRUB configuration file
