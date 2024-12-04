@@ -1,9 +1,4 @@
 ---
-# FIXME: Move this vars prompt to a playbook, where it belongs
-vars_prompt:
-  - name: "ssh_passphrase"
-    prompt: "Enter the passphrase for the SSH key"
-
 - name: Generate SSH key ~/.ssh/{{ ssh_key_filename }}
   vars: { ansible_become: false }
   user:

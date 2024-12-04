@@ -1,8 +1,10 @@
 ---
-- name: Run individual role specified by -e role=<role>
+- name: Run a target role in isolation
   hosts: workstations
+  vars:
+    role: "{{ target | default('ansible.test.dummy') }}"
   tasks:
-    - name: Import {{ role }} role
+    - name: "Import the {{ role }} role"
       import_role:
         name: "{{ role }}"
 ...

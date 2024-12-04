@@ -3,7 +3,7 @@
   hosts: workstations
   handlers:
     # <https://serverfault.com/questions/928200/global-handlers-in-ansible>
-    - import_tasks: roles/common/handlers/main.yml
+    - import_tasks: ../roles/ansible.meta/handlers/main.yml
   tasks:
     - name: Update RPMs
       dnf:

@@ -1,2 +1,2 @@
 ---
-- include: postinstall-ardour.yml
+- import_tasks: postinstall-ardour.yml

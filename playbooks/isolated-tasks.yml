@@ -1,0 +1,12 @@
+---
+- name: Run all tasks defined in a target file
+  hosts: workstations
+  vars:
+    file: "{{ target | default('../roles/ansible.test.dummy/tasks/main.yml') }}"
+  tasks:
+    - name: "Import tasks from {{ file }}"
+      import_tasks:
+        file: "{{ file }}"
+...
+# TODO: Verify assumption that this playbook does NOT read in
+# role-specific variables, run role-specific handlers, etc.

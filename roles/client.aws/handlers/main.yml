@@ -1,2 +1,2 @@
 ---
-- include: postinstall-awscli.yml
+- import_tasks: postinstall-awscli.yml

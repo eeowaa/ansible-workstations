@@ -5,4 +5,5 @@
     - name: ssh_key_passphrase
       prompt: Enter a passphrase for your new SSH key
   roles:
-    - ssh-client
+    - client.ssh
+    # TODO: Add more roles

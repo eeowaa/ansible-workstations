@@ -1,3 +1,4 @@
+---
 ssh_key_type: rsa
 ssh_key_bits: 4096
 ssh_key_filename: id_rsa

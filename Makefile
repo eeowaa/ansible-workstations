@@ -6,22 +6,18 @@ targetdir := .make
 
 # Playbook directory and files
 playbookdir := playbooks
-playbooks := $(shell cd $(playbookdir) && echo *)
+playbooks := $(notdir $(wildcard $(playbookdir)/*.yml))
 
-# Flags passed to `ansible-playbook` in test-* rules: run (v)erbosely and
-# prompt for credentials (K); privilege escalation (i.e. "become") is specified
-# by inventory variables
-TFLAGS := -vK
+# Default flags passed to `ansible-playbook`: run (v)erbosely and prompt for
+# credentials (K); privilege escalation (i.e. "become") is specified by
+# inventory variables. Override with -vKC to perform a dry run.
+ANSIBLE_FLAGS := -vK
 
-# Install programs required for running this Makefile's recipes
+# Install programs and roles required for running this Makefile's recipes
 .PHONY: setup
 setup:
 	dnf install -y ansible ansible-lint
-
-# Install required roles from Ansible Galaxy
-.PHONY: deps
-deps:
-	ansible-galaxy install -r requirements.yml
+	if test -f requirements.yml; then ansible-galaxy install -r requirements.yml; fi
 
 # Check the syntax of altered playbooks (validity + linting)
 .PHONY: check lint
@@ -29,9 +25,11 @@ check: $(foreach playbook,$(playbooks),$(targetdir)/check-$(playbook))
 lint: $(foreach playbook,$(playbooks),$(targetdir)/lint-$(playbook))
 define defrules
 $(targetdir)/check-$1: $(playbookdir)/$1
+	@echo '! Checking syntax of playbook: $$<'
 	ANSIBLE_HOST_PATTERN_MISMATCH=ignore ansible-playbook --syntax-check $$<
 	@mkdir -p $$(@D) && touch $$@
 $(targetdir)/lint-$1: $(playbookdir)/$1
+	@echo '! Linting playbook: $$<'
 	ansible-lint $$<
 	@mkdir -p $$(@D) && touch $$@
 endef
@@ -42,14 +40,29 @@ $(foreach playbook,$(playbooks),$(eval $(call defrules,$(playbook))))
 clean:
 	rm -rf $(targetdir)
 
-# Test a single Ansible role specified by $(ROLE)
-.PHONY: test-role
-test-role:
-	@test 'X$(ROLE)' != X || { echo >&2 'Unset variable: ROLE'; exit 1; }
-	ansible-playbook -C -e role='$(ROLE)' $(TFLAGS) '$(playbookdir)/single-role.yml'
+# Run a $(TARGET) role in isolation
+.PHONY: role
+ifeq (role,$(findstring role,$(MAKECMDGOALS)))
+    export TARGET
+    ifeq (,$(TARGET))
+        $(error Unset variable: TARGET)
+    else ifneq (0,$(shell test -d "roles/$${TARGET}"; echo $$?))
+        $(error Not a directory: roles/$(TARGET))
+    endif
+endif
+role:
+	ansible-playbook -e target="$${TARGET}" $(ANSIBLE_FLAGS) '$(playbookdir)/isolated-role.yml'
 
-# Test a single Ansible task list specified by $(FILE)
-.PHONY: test-tasks
-test-tasks:
-	@test 'X$(FILE)' != X || { echo >&2 'Unset variable: FILE'; exit 1; }
-	ansible-playbook -C -e file='$(FILE)' $(TFLAGS) '$(playbookdir)/single-task-list.yml'
+# Run all tasks defined in a $(TARGET) file
+.PHONY: tasks
+ifeq (tasks,$(findstring tasks,$(MAKECMDGOALS)))
+    export TARGET
+    ifeq (,$(TARGET))
+        $(error Unset variable: TARGET)
+    else ifneq (0,$(shell test -f "$${TARGET}"; echo $$?))
+        $(error Not a regular file: $(TARGET))
+    endif
+    override TARGET := $(shell realpath --relative-to='$(playbookdir)' "$${TARGET}")
+endif
+tasks:
+	ansible-playbook -e target="$${TARGET}" $(ANSIBLE_FLAGS) '$(playbookdir)/isolated-tasks.yml'

@@ -1,0 +1,5 @@
+---
+- name: View filesystems
+  vars: { ansible_become: false }
+  command: df -h
+  changed_when: false  # This task never changes the host
