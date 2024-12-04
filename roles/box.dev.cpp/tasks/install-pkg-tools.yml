@@ -1,6 +1,6 @@
 ---
 - name: Install packaging tools
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name:
       - libtool

@@ -19,7 +19,7 @@ Same as above:
   - Currently using this for aws-client role
 - Tags (e.g. -t update)
 
-# TODO: Use `dconf` Ansible module to implement GNOME settings
+# WIP: Use `dconf` Ansible module to implement GNOME settings
 
 - <https://fedoramagazine.org/using-ansible-setup-workstation/>
 - Do this in `gnome-desktop` role.

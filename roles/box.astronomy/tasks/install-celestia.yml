@@ -1,6 +1,6 @@
 ---
 - name: Install Celestia
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name:
       - celestia

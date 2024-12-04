@@ -1,6 +1,6 @@
 ---
 - name: Install essential interactive utilities
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name:
       - tmux
@@ -8,7 +8,7 @@
 
 # TODO: Investigate other options (e.g. urxvt, st)
 - name: Install a terminal emulator (xterm)
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name:
       - xterm

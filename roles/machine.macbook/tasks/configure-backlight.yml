@@ -1,6 +1,6 @@
 ---
 - name: Install CLI client to control brightness of devices
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name: brightnessctl
 

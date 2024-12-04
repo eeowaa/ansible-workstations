@@ -1,62 +1,77 @@
 ---
 - name: Check for existence of custom xkb symbols
-  stat:
+  ansible.builtin.stat:
     path: "{{ xkb_symbols_dir }}/{{ xkb_symbols }}"
   register: symbols
 
 - name: Install the custom xkb symbols
   when: not symbols.stat.exists
-  copy:
+  ansible.builtin.copy:
     src: "{{ role_path }}/files/{{ xkb_symbols }}.symbols"
     dest: "{{ xkb_symbols_dir }}/{{ xkb_symbols }}"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 
 - name: Edit evdev
-  lineinfile:
+  ansible.builtin.lineinfile:
     state: present
     path: "{{ xkb_rules_dir }}/evdev"
-    insertafter: '^! *option *= *symbol *$'
-    line: '  eeowaa:macbook = +eeowaa(macbook)'
+    insertafter: '^![ \t]*option[ \t]*=[ \t]*symbols[ \t]*$'
+    line: '  eeowaa:macbook	=	+eeowaa(macbook)'
 
 - name: Edit evdev.lst
-  blockinfile:
+  ansible.builtin.blockinfile:
     state: present
     path: "{{ xkb_rules_dir }}/evdev.lst"
-    insertafter: '^! *option *$'
+    insertafter: '^![ \t]*option[ \t]*$'
     marker: '! {mark} ANSIBLE MANAGED BLOCK'
-    block: |-
-      eeowaa               Custom modifier mappings
-      eeowaa:macbook       Mappings for broken Macbook Pro keyboard
+    block: |-2
+        eeowaa               Custom modifier mappings
+        eeowaa:macbook       Mappings for broken Macbook Pro keyboard
 
-# FIXME
-- name: Edit evdev.xml (1/3)
-  xml:
+- name: Check for custom group in evdev.xml
+  community.general.xml:
+    count: true
+    path: "{{ xkb_rules_dir }}/evdev.xml"
+    xpath: '//xkbConfigRegistry/optionList/group/configItem/name[text()="eeowaa"]'
+  register: hits
+
+- name: Edit evdev.xml
+  when: hits.count == 0
+  community.general.xml:
     state: present
     path: "{{ xkb_rules_dir }}/evdev.xml"
-    xpath: //xkbConfigRegistry/optionList/group
-    attribute: allowMultipleSelection
-    value: 'true'
-    add_children:
+    xpath: '//xkbConfigRegistry/optionList'
+    input_type: 'xml'
+    pretty_print: true
+    add_children: |2
+          <group allowMultipleSelection="true">
+            <configItem>
+              <name>eeowaa</name>
+              <description>Custom modifier mappings</description>
+            </configItem>
+            <option>
+              <configItem>
+                <name>eeowaa:macbook</name>
+                <description>Mappings for broken Macbook Pro keyboard</description>
+              </configItem>
+            </option>
+          </group>
 
-# FIXME
-- name: Edit evdev.xml (2/3)
-  xml:
-    state: present
-    path: "{{ xkb_rules_dir }}/evdev.xml"
-    xpath: //xkbConfigRegistry/optionList/group/option/configItem
-    add_children:
-      - name: eeowaa
-      - description: 'Custom modifier mappings'
+- name: Set xkb options in dconf
+  vars: { ansible_become: false }
+  community.general.dconf:
+    key: /org/gnome/desktop/input-sources/xkb-options
+    value: "['eeowaa']"
 
-# FIXME
-- name: Edit evdev.xml (3/3)
-  xml:
-    state: present
-    path: "{{ xkb_rules_dir }}/evdev.xml"
-    xpath: '//xkbConfigRegistry/optionList/group/option/configItem'
-    insertafter: true
-    add_children:
-      - name: eeowaa:macbook
-      - description: 'Mappings for broken Macbook Pro keyboard'
+- name: Apply xkb settings immediately
+  vars: { ansible_become: false }
+  ansible.builtin.command: localectl --no-convert set-x11-keymap us '' '' eeowaa
+  changed_when: false  # FIXME: Only run this when required
+  # command: setxkbmap -option "" -option eeowaa
+
+# TODO
+# Since /usr/share/X11/xkb/rules/evdev* files are provided by the
+# xkeyboard-config RPM (see `rpm -qf <files>`), when that RPM updates,
+# we need to rewrite those files.

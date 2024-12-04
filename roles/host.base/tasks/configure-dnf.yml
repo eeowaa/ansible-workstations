@@ -1,11 +1,11 @@
 ---
 - name: Install yum-utils compatibility layer
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name: dnf-utils
 
 - name: Install RPM Fusion repositories
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name: "https://download1.rpmfusion.org/{{ item }}/fedora/rpmfusion-{{ item }}-release-{{ ansible_distribution_major_version }}.noarch.rpm"
   loop:
@@ -22,19 +22,19 @@
     backup: yes
 
 - name: Configure DNF to use the fastest download mirror
-  ini_file:
+  community.general.ini_file:
     path: /etc/dnf/dnf.conf
     section: main
     option: fastestmirror
     value: 'True'
     no_extra_spaces: true
-    # backup: yes
+    # backup: true
 
 - name: Configure DNF to download up to 10 packages simultaneously
-  ini_file:
+  community.general.ini_file:
     path: /etc/dnf/dnf.conf
     section: main
     option: max_parallel_downloads
     value: '10'
     no_extra_spaces: true
-    # backup: yes
+    # backup: true

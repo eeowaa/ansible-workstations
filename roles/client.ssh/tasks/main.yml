@@ -1,2 +1,5 @@
 ---
-- import_tasks: generate-ssh-key.yml
+- name: Include tasks defined in this role
+  ansible.builtin.include_tasks: "{{ item }}"
+  loop:
+    - generate-ssh-key.yml

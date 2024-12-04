@@ -1,6 +1,6 @@
 ---
 - name: Install Inkscape
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name:
       - inkscape

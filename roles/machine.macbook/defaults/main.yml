@@ -3,9 +3,12 @@ keymaps_dir: /usr/lib/kbd/keymaps/custom
 keymaps:
   macbook_pro: us-macbook-pro
 
+fonts_dir: /usr/lib/kbd/consolefonts
+fonts:
+  macbook_pro: Lat2-Terminus16
+
 # TODO: <https://unix.stackexchange.com/questions/479673/changing-the-keyboard-layout-mapping-on-both-the-console-tty-and-x-in-an-x-con>
-# xkb_root_dir: /usr/share/X11/xkb
-xkb_root_dir: /tmp
+xkb_root_dir: /usr/share/X11/xkb
 xkb_symbols_dir: "{{ xkb_root_dir }}/symbols"
 xkb_rules_dir: "{{ xkb_root_dir }}/rules"
 xkb_symbols: eeowaa

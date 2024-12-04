@@ -5,7 +5,7 @@
     file: "{{ target | default('../roles/ansible.test.dummy/tasks/main.yml') }}"
   tasks:
     - name: "Import tasks from {{ file }}"
-      import_tasks:
+      ansible.builtin.import_tasks:
         file: "{{ file }}"
 ...
 # TODO: Verify assumption that this playbook does NOT read in

@@ -1,6 +1,6 @@
 ---
 - name: Install basic text editors
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name:
       - ed

@@ -1,6 +1,6 @@
 ---
 - name: Install diff and merge tools
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name:
       - meld

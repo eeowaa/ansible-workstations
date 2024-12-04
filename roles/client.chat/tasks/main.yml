@@ -1,6 +1,9 @@
 ---
-- import_tasks: install-discord.yml
-- import_tasks: install-signal.yml
-- import_tasks: install-slack.yml
-- import_tasks: install-weechat.yml
-- import_tasks: install-zoom.yml
+- name: Include tasks defined in this role
+  ansible.builtin.include_tasks: "{{ item }}"
+  loop:
+    - install-discord.yml
+    - install-signal.yml
+    - install-slack.yml
+    - install-weechat.yml
+    - install-zoom.yml

@@ -8,7 +8,7 @@
 # /etc/yum.repos.d/rpmfusion-nonfree-steam.repo
 #
 - name: Install Fedora Workstation repositories
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name: fedora-workstation-repositories
   tags:
@@ -18,7 +18,7 @@
 # I use Chrome as a workaround for when I have problems with codecs, DRM, etc.
 # while using Firefox.  I leave Chromium uninstalled and primarily use Firefox.
 - name: Install Google Chrome
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name: google-chrome-stable
   tags:

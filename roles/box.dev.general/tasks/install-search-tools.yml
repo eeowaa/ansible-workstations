@@ -1,6 +1,6 @@
 ---
 - name: Install search and finder tools
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name:
       - fzf

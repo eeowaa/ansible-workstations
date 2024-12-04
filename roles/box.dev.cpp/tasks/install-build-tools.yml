@@ -1,6 +1,6 @@
 ---
 - name: Install build tools
-  dnf:
+  ansible.builtin.dnf:
     state: present
     name:
       - automake

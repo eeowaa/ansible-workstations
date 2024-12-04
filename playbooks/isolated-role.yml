@@ -4,8 +4,8 @@
   vars:
     role: "{{ target | default('ansible.test.dummy') }}"
   tasks:
-    - name: "Import the {{ role }} role"
-      import_role:
+    - name: "Import the role named {{ role }}"
+      ansible.builtin.import_role:
         name: "{{ role }}"
 ...
 # References:

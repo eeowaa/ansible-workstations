@@ -1,7 +1,7 @@
 ---
 - name: Install Zoom
   vars: { ansible_become: false }
-  flatpak:
+  community.general.flatpak:
     method: user
     state: present
     name: us.zoom.Zoom

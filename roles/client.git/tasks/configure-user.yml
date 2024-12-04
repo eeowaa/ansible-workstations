@@ -1,13 +1,13 @@
 - name: Set user.name in global git config
   vars: { ansible_become: false }
-  git_config:
+  community.general.git_config:
     name: user.name
     scope: global
     value: "{{ git_user_name }}"
 
 - name: Set user.email in global git config
   vars: { ansible_become: false }
-  git_config:
+  community.general.git_config:
     name: user.email
     scope: global
     value: "{{ git_user_email }}"

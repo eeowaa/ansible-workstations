@@ -1,5 +1,5 @@
 ---
-- name: View filesystems
-  vars: { ansible_become: false }
-  command: df -h
-  changed_when: false  # This task never changes the host
+- name: Include tasks defined in this role
+  ansible.builtin.include_tasks: "{{ item }}"
+  loop:
+    - view-filesystems.yml

@@ -1,5 +1,8 @@
 ---
-- import_tasks: configure-flatpak.yml
-- import_tasks: configure-dconf.yml
-- import_tasks: configure-display.yml  # TODO: Map dependency on configure-dconf.yml
-- import_tasks: install-codecs.yml
+- name: Include tasks defined in this role
+  ansible.builtin.include_tasks: "{{ item }}"
+  loop:
+    - configure-flatpak.yml
+    - configure-dconf.yml
+    - configure-display.yml  # TODO: Map dependency on configure-dconf.yml
+    - install-codecs.yml

@@ -1,7 +1,7 @@
 ---
 - name: Install Signal
   vars: { ansible_become: false }
-  flatpak:
+  community.general.flatpak:
     method: user
     state: present
     name: org.signal.Signal
@@ -11,7 +11,7 @@
 
 - name: Configure Signal password store
   vars: { ansible_become: false }
-  command:
+  ansible.builtin.command:
     argv:
       - /usr/bin/flatpak
       - override

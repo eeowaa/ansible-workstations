@@ -22,7 +22,7 @@ profiles=$ffdir/profiles.ini
 [ -f "$profiles" ] ||
     die "Missing required file: $profiles"
 
-# REVIEW: Is this always the corect thing to look for?
+# REVIEW: Is this always the correct thing to look for?
 default=$ffdir/`awk -F= '
     $0 == "Name=default-default" { x = 1 }
     x && $1 == "Path" { print $2; exit }

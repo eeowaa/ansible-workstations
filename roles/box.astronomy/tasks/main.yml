@@ -1,3 +1,6 @@
 ---
-- import_tasks: install-cellestia.yml
-- import_tasks: install-stellarium.yml
+- name: Include tasks defined in this role
+  ansible.builtin.include_tasks: "{{ item }}"
+  loop:
+    - install-cellestia.yml
+    - install-stellarium.yml

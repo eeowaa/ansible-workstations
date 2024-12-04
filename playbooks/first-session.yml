@@ -3,16 +3,19 @@
   hosts: workstations
   handlers:
     # <https://serverfault.com/questions/928200/global-handlers-in-ansible>
-    - import_tasks: ../roles/ansible.meta/handlers/main.yml
+    - name: Import global handlers
+      ansible.builtin.import_tasks:
+        file: ../roles/ansible.meta/handlers/main.yml
+
   tasks:
     - name: Update RPMs
-      dnf:
+      ansible.builtin.dnf:
         name: "*"
-        state: latest  # noqa 403
+        state: latest  # noqa package-latest
       notify: Reboot
 
     - name: Install and configure specifics to Macbook Pro
-      import_role:
+      ansible.builtin.import_role:
         name: machine.macbook
       when: computer == 'Macbook Pro'
       notify: Reboot
