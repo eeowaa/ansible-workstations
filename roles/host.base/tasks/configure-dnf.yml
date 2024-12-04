@@ -12,15 +12,6 @@
     - free
     - nonfree
 
-- name: Configure DNF to always assume "yes" for user
-  ini_file:
-    path: /etc/dnf/dnf.conf
-    section: main
-    option: assumeyes
-    value: 'True'
-    no_extra_spaces: true
-    backup: yes
-
 - name: Configure DNF to use the fastest download mirror
   community.general.ini_file:
     path: /etc/dnf/dnf.conf
