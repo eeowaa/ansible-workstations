@@ -5,6 +5,35 @@
     - name: ssh_key_passphrase
       prompt: Enter a passphrase for your new SSH key
   roles:
-    - client.ssh
+    # Common configuration
+    - host.base
+    - host.interactive
+    # FIXME: host.docker
+
+    # Physical machines
+    - machine.local
+    # FIXME: machine.macbook
+
+    # Graphical desktops
+    - desktop.gnome
+
+    # Network clients
+    # FIXME: client.ssh
+    - client.git
+    - client.aws
+    - client.bitwarden
+    - client.web
+    - client.chat
+
+    # Data storage
+    - store.ref
+
+    # Application software
+    - box.dev.general
+    - box.dev.cpp
+    - box.dev.net
+    - box.image.edit
+    # FIXME: box.audio.edit
+    - box.astronomy
+    # FIXME: box.gaming
 ...
-# TODO: Add more roles
