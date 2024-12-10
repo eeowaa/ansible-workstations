@@ -13,4 +13,4 @@ if test -f requirements.yml; then
 fi
 
 # Need to perform one-time operations (will restart computer)
-ansible-playbook -v playbooks/first-session.yml
+ansible-playbook -v playbooks/00-bootstrap.yml
