@@ -1,6 +1,8 @@
 ---
 - name: Include tasks defined in this role
-  ansible.builtin.include_tasks: "{{ item }}"
+  ansible.builtin.include_tasks: "{{ tasks }}"
   loop:
     - install-editors.yml
     - install-utils.yml
+  loop_control:
+    loop_var: tasks

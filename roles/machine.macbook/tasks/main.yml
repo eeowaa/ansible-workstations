@@ -1,9 +1,11 @@
 ---
 - name: Include tasks defined in this role
-  ansible.builtin.include_tasks: "{{ item }}"
+  ansible.builtin.include_tasks: "{{ tasks }}"
   loop: []
     # FIXME: Include task lists once properly specified
     # - install-wifi.yml
     # - configure-backlight.yml
     # - configure-kbd.yml
     # - configure-xkb.yml
+  loop_control:
+    loop_var: tasks

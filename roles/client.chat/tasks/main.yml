@@ -1,9 +1,11 @@
 ---
 - name: Include tasks defined in this role
-  ansible.builtin.include_tasks: "{{ item }}"
+  ansible.builtin.include_tasks: "{{ tasks }}"
   loop:
     - install-discord.yml
     - install-signal.yml
     - install-slack.yml
     - install-weechat.yml
     - install-zoom.yml
+  loop_control:
+    loop_var: tasks

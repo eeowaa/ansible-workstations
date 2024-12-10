@@ -1,7 +1,9 @@
 ---
 - name: Include tasks defined in this role
-  ansible.builtin.include_tasks: "{{ item }}"
+  ansible.builtin.include_tasks: "{{ tasks }}"
   loop:
     - install-lynx.yml
     - install-firefox.yml
     - install-chrome.yml
+  loop_control:
+    loop_var: tasks

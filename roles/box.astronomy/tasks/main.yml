@@ -1,6 +1,8 @@
 ---
 - name: Include tasks defined in this role
-  ansible.builtin.include_tasks: "{{ item }}"
+  ansible.builtin.include_tasks: "{{ tasks }}"
   loop:
     - install-cellestia.yml
     - install-stellarium.yml
+  loop_control:
+    loop_var: tasks

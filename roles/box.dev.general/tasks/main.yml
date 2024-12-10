@@ -1,12 +1,13 @@
 ---
 - name: Include tasks defined in this role
-  ansible.builtin.include_tasks: "{{ item }}"
+  ansible.builtin.include_tasks: "{{ tasks }}"
   loop:
     # IDEs
     - install-doom-emacs.yml
     - install-vscode.yml
-
     # Standalone tools
     - install-shells.yml
     - install-diff-tools.yml
     - install-search-tools.yml
+  loop_control:
+    loop_var: tasks

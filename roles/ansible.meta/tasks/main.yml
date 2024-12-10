@@ -1,5 +1,7 @@
 ---
 - name: Include tasks defined in this role
-  ansible.builtin.include_tasks: "{{ item }}"
+  ansible.builtin.include_tasks: "{{ tasks }}"
   loop:
     - download-test-image.yml
+  loop_control:
+    loop_var: tasks
